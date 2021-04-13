@@ -3,17 +3,20 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class LoginForm {
 
+
+
     @FXML
-    private Pane root;
+    private AnchorPane rootPane;
 
     public LoginForm() {
-        this.root = new AnchorPane();
+
     }
 
     public Pane getRootPane() {
-        return root ;
+        return rootPane ;
     }
 }
