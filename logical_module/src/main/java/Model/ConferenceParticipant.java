@@ -1,5 +1,6 @@
 package Model;
 public class ConferenceParticipant {
+    protected int id;
     protected String name;
     protected String username;
     protected String password;
@@ -8,14 +9,16 @@ public class ConferenceParticipant {
     protected String affiliation;
     protected String webPage;
 
-    public ConferenceParticipant(String name, String username, String password) {
+    public ConferenceParticipant(int id, String name, String username, String password) {
+        this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
         this.hasPayedFee=false;
     }
 
-    public ConferenceParticipant(String name, String username, String password, boolean hasPayedFee, String cardNumber, String affiliation, String webPage) {
+    public ConferenceParticipant(int id, String name, String username, String password, boolean hasPayedFee, String cardNumber, String affiliation, String webPage) {
+        this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -23,6 +26,14 @@ public class ConferenceParticipant {
         this.cardNumber = cardNumber;
         this.affiliation = affiliation;
         this.webPage = webPage;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

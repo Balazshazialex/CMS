@@ -1,8 +1,8 @@
 package Model;
 
 public class CChair extends PCMember  {
-    public CChair(String name, String username, String password) {
-        super(name, username, password);
+    public CChair(int id, String name, String username, String password) {
+        super(id, name, username, password);
     }
 
     public void postponeDeadlines() {
