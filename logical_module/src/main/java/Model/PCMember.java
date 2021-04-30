@@ -2,8 +2,8 @@ package Model;
 
 public class PCMember  extends ConferenceParticipant implements IPCMember{
 
-    public PCMember(String name, String username, String password) {
-        super(name, username, password);
+    public PCMember(int id, String name, String username, String password) {
+        super(id, name, username, password);
     }
 
     @Override
