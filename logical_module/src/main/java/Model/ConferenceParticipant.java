@@ -1,5 +1,5 @@
 package Model;
-public abstract class ConferenceParticipant {
+public class ConferenceParticipant {
     protected String name;
     protected String username;
     protected String password;
@@ -13,6 +13,16 @@ public abstract class ConferenceParticipant {
         this.username = username;
         this.password = password;
         this.hasPayedFee=false;
+    }
+
+    public ConferenceParticipant(String name, String username, String password, boolean hasPayedFee, String cardNumber, String affiliation, String webPage) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.hasPayedFee = hasPayedFee;
+        this.cardNumber = cardNumber;
+        this.affiliation = affiliation;
+        this.webPage = webPage;
     }
 
     public String getName() {
@@ -75,4 +85,16 @@ public abstract class ConferenceParticipant {
 
     }
 
+    @Override
+    public String toString() {
+        return "ConferenceParticipant{" +
+                "name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", hasPayedFee=" + hasPayedFee +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", affiliation='" + affiliation + '\'' +
+                ", webPage='" + webPage + '\'' +
+                '}';
+    }
 }
