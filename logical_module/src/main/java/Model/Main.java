@@ -6,6 +6,5 @@ import jdk.swing.interop.SwingInterOpUtils;
 public class Main {
     public static void main(String[] args) {
         UserController u=new UserController();
-        System.out.println(u.findAll());
     }
 }

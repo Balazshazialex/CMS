@@ -15,4 +15,6 @@ public class UserController {
     public List<ConferenceParticipant> findAll(){
         return repo.findAll();
     }
+    public ConferenceParticipant findOne(int id) {return repo.findOne(id);}
+    public void update(ConferenceParticipant participant) {repo.update(participant);}
 }

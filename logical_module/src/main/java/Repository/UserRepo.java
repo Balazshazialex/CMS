@@ -31,10 +31,10 @@ public class UserRepo {
                 String name = rs.getString("name");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                boolean hasPayedFee = rs.getBoolean("hasPayedFee");
-                String cardNumber=rs.getString("cardNumber");
+                boolean hasPayedFee = rs.getBoolean("haspayedfee");
+                String cardNumber=rs.getString("cardnumber");
                 String affiliation=rs.getString("affiliation");
-                String webPage=rs.getString("webPage");
+                String webPage=rs.getString("webpage");
                 ConferenceParticipant jeanJacques=new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage);
                 peopleThatFeelSuperior.add(jeanJacques);
             }
@@ -49,16 +49,17 @@ public class UserRepo {
         String query = "select * from conferenceparticipant where id=?";
         try(var connection = DriverManager.getConnection(url, username, password);
             var ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
             var rs = ps.executeQuery();
             rs.next();
             String name = rs.getString("name");
             String username = rs.getString("username");
             String password = rs.getString("password");
-            boolean hasPayedFee = rs.getBoolean("hasPayedFee");
-            String cardNumber=rs.getString("cardNumber");
+            boolean hasPayedFee = rs.getBoolean("haspayedfee");
+            String cardNumber=rs.getString("cardnumber");
             String affiliation=rs.getString("affiliation");
-            String webPage=rs.getString("webPage");
-            ConferenceParticipant jeanJacques=new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage);
+            String webPage=rs.getString("webpage");
+            participant =new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage);
             participant.setId(id);
 
         } catch (SQLException throwable) {
@@ -68,7 +69,7 @@ public class UserRepo {
     }
 
     public void update(ConferenceParticipant participant) {
-        String query = "update conferenceparticipant set name=?, username=?, password=?, hasPayedFee=?, cardNumber=?, affiliation=?, webPage=? where id=?";
+        String query = "update conferenceparticipant set name=?, username=?, password=?, haspayedfee=?, cardnumber=?, affiliation=?, webpage=? where id=?";
         try(var connection = DriverManager.getConnection(url, username, password);
             var ps = connection.prepareStatement(query)) {
 
