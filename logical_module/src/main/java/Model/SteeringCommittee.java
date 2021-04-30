@@ -5,10 +5,6 @@ public class SteeringCommittee extends SectionParticipant{
         super(name, username, password);
     }
 
-    @Override
-    public void payRegistrationFee(String cardNumber) {
-    }
-
     public void postConferenceInformation(){
 
     }
