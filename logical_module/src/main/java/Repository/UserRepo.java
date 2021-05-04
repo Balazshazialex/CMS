@@ -5,10 +5,7 @@ import Model.ConferenceParticipant;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UserRepo {
     private final String url;
@@ -87,5 +84,14 @@ public class UserRepo {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    public boolean check_creds(String username, String password){
+        ArrayList<ConferenceParticipant> p= (ArrayList<ConferenceParticipant>) this.findAll();
+        for (ConferenceParticipant x:p
+             ) {
+            if(x.getUsername().equals(username) && x.getPassword().equals(password)) return true;
+        }
+        return false;
     }
 }
