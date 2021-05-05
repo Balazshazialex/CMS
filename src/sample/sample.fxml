@@ -9,13 +9,13 @@
       <VBox alignment="CENTER" prefHeight="379.0" prefWidth="331.0">
          <children>
             <Label text="Username" />
-            <TextField layoutX="210.0" layoutY="147.0" prefHeight="14.0" prefWidth="660.0">
+            <TextField fx:id="usernameField" layoutX="210.0" layoutY="147.0" prefHeight="14.0" prefWidth="660.0">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>
             </TextField>
             <Label layoutX="313.0" layoutY="121.0" text="Password" />
-            <TextField prefHeight="14.0" prefWidth="660.0">
+            <TextField fx:id="passwordField" prefHeight="14.0" prefWidth="660.0">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>

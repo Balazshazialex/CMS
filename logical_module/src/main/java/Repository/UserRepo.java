@@ -88,8 +88,7 @@ public class UserRepo {
 
     public boolean check_creds(String username, String password){
         ArrayList<ConferenceParticipant> p= (ArrayList<ConferenceParticipant>) this.findAll();
-        for (ConferenceParticipant x:p
-             ) {
+        for (ConferenceParticipant x:p) {
             if(x.getUsername().equals(username) && x.getPassword().equals(password)) return true;
         }
         return false;
