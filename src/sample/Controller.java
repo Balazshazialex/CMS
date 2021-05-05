@@ -49,8 +49,14 @@ public class Controller implements Initializable {
         String password = this.passwordField.getText();
         String role = this.loginRoleLabel.getText();
         if(this.userController.check_creds(username, password,role)) {
+            String nextScreen = "/sample/LoginForm.fxml";
+            if(role.equals("Steering committee member")) {
+                nextScreen = "/sample/AfterLoginSteeringCommitteeMember.fxml";
+            } else if(role.equals("PC member")) {
+                nextScreen = "/sample/LoginForm.fxml";
+            }
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/LoginForm.fxml"));
+            loader.setLocation(getClass().getResource(nextScreen));
             try {
                 Parent parent = loader.load();
                 loginButton.getScene().setRoot(parent);

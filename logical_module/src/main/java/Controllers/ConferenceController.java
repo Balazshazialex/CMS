@@ -22,4 +22,5 @@ public class ConferenceController {
     public void add(Conference conference){
         repo.add(conference);
     }
+    public int getNextId(){return repo.getNextId();}
 }

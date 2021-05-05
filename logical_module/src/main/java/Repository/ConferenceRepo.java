@@ -103,4 +103,19 @@ public class ConferenceRepo {
         }
     }
 
+    public int getNextId() {
+        String query = "select max(id)+1 from conference";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query);
+             var result = ps.executeQuery()) {
+            result.next();
+            return result.getInt(1);
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return 1;
+    }
+
 }
