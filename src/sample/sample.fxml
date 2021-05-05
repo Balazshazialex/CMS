@@ -8,6 +8,21 @@
    <children>
       <VBox alignment="CENTER" prefHeight="379.0" prefWidth="331.0">
          <children>
+            <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="254.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="70.0" text="Login as: " />
+                  <MenuButton mnemonicParsing="false" text="Role">
+                    <items>
+                      <MenuItem fx:id="steeringCommitteeRole" mnemonicParsing="false" onAction="#displaySelectedRole" text="Steering committee member" />
+                      <MenuItem fx:id="PCmemberRole" mnemonicParsing="false" onAction="#displaySelectedRole" text="PC member" />
+                        <MenuItem fx:id="ChairRole" mnemonicParsing="false" onAction="#displaySelectedRole" text="Chair/ co-chair" />
+                        <MenuItem fx:id="ListenerRole" mnemonicParsing="false" onAction="#displaySelectedRole" text="Listener" />
+                        <MenuItem fx:id="AuthorRole" mnemonicParsing="false" onAction="#displaySelectedRole" text="Author" />
+                    </items>
+                  </MenuButton>
+               </children>
+            </HBox>
+            <Label fx:id="loginRoleLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="221.0" textAlignment="CENTER" />
             <Label text="Username" />
             <TextField fx:id="usernameField" layoutX="210.0" layoutY="147.0" prefHeight="14.0" prefWidth="660.0">
                <VBox.margin>

@@ -32,7 +32,8 @@ public class UserRepo {
                 String cardNumber=rs.getString("cardnumber");
                 String affiliation=rs.getString("affiliation");
                 String webPage=rs.getString("webpage");
-                ConferenceParticipant jeanJacques=new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage);
+                String role = rs.getString("role");
+                ConferenceParticipant jeanJacques=new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage,role);
                 peopleThatFeelSuperior.add(jeanJacques);
             }
         } catch (SQLException throwable) {
@@ -56,7 +57,8 @@ public class UserRepo {
             String cardNumber=rs.getString("cardnumber");
             String affiliation=rs.getString("affiliation");
             String webPage=rs.getString("webpage");
-            participant =new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage);
+            String role = rs.getString("role");
+            participant =new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage,role);
             participant.setId(id);
 
         } catch (SQLException throwable) {
@@ -66,7 +68,7 @@ public class UserRepo {
     }
 
     public void update(ConferenceParticipant participant) {
-        String query = "update conferenceparticipant set name=?, username=?, password=?, haspayedfee=?, cardnumber=?, affiliation=?, webpage=? where id=?";
+        String query = "update conferenceparticipant set name=?, username=?, password=?, haspayedfee=?, cardnumber=?, affiliation=?, webpage=?, role=? where id=?";
         try(var connection = DriverManager.getConnection(url, username, password);
             var ps = connection.prepareStatement(query)) {
 
@@ -78,6 +80,7 @@ public class UserRepo {
             ps.setString(6, participant.getAffiliation());
             ps.setString(7, participant.getWebPage());
             ps.setInt(8, participant.getId());
+            ps.setString(9, participant.getRole());
 
             ps.executeUpdate();
 
@@ -86,10 +89,10 @@ public class UserRepo {
         }
     }
 
-    public boolean check_creds(String username, String password){
+    public boolean check_creds(String username, String password, String role){
         ArrayList<ConferenceParticipant> p= (ArrayList<ConferenceParticipant>) this.findAll();
         for (ConferenceParticipant x:p) {
-            if(x.getUsername().equals(username) && x.getPassword().equals(password)) return true;
+            if(x.getUsername().equals(username) && x.getPassword().equals(password) && x.getRole().equals(role)) return true;
         }
         return false;
     }

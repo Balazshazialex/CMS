@@ -1,14 +1,13 @@
 package sample;
 
 import Controllers.UserController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,7 +26,18 @@ public class Controller implements Initializable {
     TextField usernameField;
     @FXML
     TextField passwordField;
-
+    @FXML
+    Label loginRoleLabel;
+    @FXML
+    MenuItem steeringCommitteeRole;
+    @FXML
+    MenuItem PCmemberRole;
+    @FXML
+    MenuItem ChairRole;
+    @FXML
+    MenuItem ListenerRole;
+    @FXML
+    MenuItem AuthorRole;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,7 +47,8 @@ public class Controller implements Initializable {
     public void loginButtonClick() {
         String username = this.usernameField.getText();
         String password = this.passwordField.getText();
-        if(this.userController.check_creds(username, password)) {
+        String role = this.loginRoleLabel.getText();
+        if(this.userController.check_creds(username, password,role)) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/sample/LoginForm.fxml"));
             try {
@@ -48,7 +59,7 @@ public class Controller implements Initializable {
                 alert.showAndWait();
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Invalid username or password !", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Invalid username, password or chosen role !", ButtonType.OK);
             alert.showAndWait();
         }
     }
@@ -56,6 +67,11 @@ public class Controller implements Initializable {
     public void exit() {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void displaySelectedRole(ActionEvent event) {
+        this.loginRoleLabel.setText(((MenuItem)event.getSource()).getText());
+        this.loginRoleLabel.setTextAlignment(TextAlignment.CENTER);
     }
 
 }

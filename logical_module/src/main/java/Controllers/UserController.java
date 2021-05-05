@@ -17,7 +17,7 @@ public class UserController {
     }
     public ConferenceParticipant findOne(int id) {return repo.findOne(id);}
     public void update(ConferenceParticipant participant) {repo.update(participant);}
-    public boolean check_creds(String username, String password){
-        return repo.check_creds(username,password);
+    public boolean check_creds(String username, String password, String role){
+        return repo.check_creds(username,password,role);
     }
 }

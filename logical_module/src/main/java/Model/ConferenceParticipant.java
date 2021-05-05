@@ -8,6 +8,7 @@ public class ConferenceParticipant {
     protected String cardNumber;
     protected String affiliation;
     protected String webPage;
+    protected String role;
 
     public ConferenceParticipant(int id, String name, String username, String password) {
         this.id = id;
@@ -17,7 +18,7 @@ public class ConferenceParticipant {
         this.hasPayedFee=false;
     }
 
-    public ConferenceParticipant(int id, String name, String username, String password, boolean hasPayedFee, String cardNumber, String affiliation, String webPage) {
+    public ConferenceParticipant(int id, String name, String username, String password, boolean hasPayedFee, String cardNumber, String affiliation, String webPage, String role) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -26,6 +27,7 @@ public class ConferenceParticipant {
         this.cardNumber = cardNumber;
         this.affiliation = affiliation;
         this.webPage = webPage;
+        this.role = role;
     }
 
     public int getId() {
@@ -92,6 +94,14 @@ public class ConferenceParticipant {
         this.webPage = webPage;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void payRegistrationFee(String cardNumber){
 
     }
@@ -99,13 +109,15 @@ public class ConferenceParticipant {
     @Override
     public String toString() {
         return "ConferenceParticipant{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", hasPayedFee=" + hasPayedFee +
                 ", cardNumber='" + cardNumber + '\'' +
                 ", affiliation='" + affiliation + '\'' +
                 ", webPage='" + webPage + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
