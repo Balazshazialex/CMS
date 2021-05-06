@@ -3,22 +3,25 @@ package sample;
 import Controllers.ConferenceController;
 import Model.Conference;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.sql.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class AfterLoginSteeringCommitteeMember implements Initializable {
+public class AfterLoginSCM implements Initializable {
 
     private ConferenceController conferenceController;
+    private List<Conference> conferences;
 
     @FXML
     private ListView<String> conferencesList;
@@ -60,8 +63,25 @@ public class AfterLoginSteeringCommitteeMember implements Initializable {
 
     private void populateConferencesList() {
         this.conferencesList.getItems().clear();
+        this.conferences = this.conferenceController.findAll();
         for(Conference conference: this.conferenceController.findAll()) {
             this.conferencesList.getItems().add(conference.getName() + " starts at: " + conference.getStartDate() + " ends at:" + conference.getEndDate());
+        }
+    }
+
+    public void addPCMembersToConference() {
+        var selectedConference = this.conferences.get(this.conferencesList.getSelectionModel().getSelectedIndex());
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/AddPCMembers.fxml"));
+            Parent parent = loader.load();
+            AddPCMembers controller = loader.getController();
+            controller.setSelectedConference(selectedConference);
+            this.conferencesList.getScene().setRoot(parent);
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
         }
     }
 }

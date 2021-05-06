@@ -118,4 +118,20 @@ public class ConferenceRepo {
         return 1;
     }
 
+    public void addPCMembers(Conference conference, List<ConferenceParticipant> participants) {
+        String query = "insert into pcmembers values(?,?)";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+            for(ConferenceParticipant participant : participants) {
+                ps.setInt(1, participant.getId());
+                ps.setInt(2, conference.getId());
+                ps.executeUpdate();
+            }
+            
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+
 }

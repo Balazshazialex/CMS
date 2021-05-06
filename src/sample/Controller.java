@@ -51,7 +51,7 @@ public class Controller implements Initializable {
         if(this.userController.check_creds(username, password,role)) {
             String nextScreen = "/sample/LoginForm.fxml";
             if(role.equals("Steering committee member")) {
-                nextScreen = "/sample/AfterLoginSteeringCommitteeMember.fxml";
+                nextScreen = "/sample/AfterLoginSCM.fxml";
             } else if(role.equals("PC member")) {
                 nextScreen = "/sample/LoginForm.fxml";
             }
