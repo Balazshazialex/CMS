@@ -79,8 +79,8 @@ public class UserRepo {
             ps.setString(5, participant.getCardNumber());
             ps.setString(6, participant.getAffiliation());
             ps.setString(7, participant.getWebPage());
-            ps.setInt(8, participant.getId());
-            ps.setString(9, participant.getRole());
+            ps.setInt(9, participant.getId());
+            ps.setString(8, participant.getRole());
 
             ps.executeUpdate();
 

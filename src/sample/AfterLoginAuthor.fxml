@@ -42,4 +42,5 @@
         </children>
     </GridPane>
     <Button layoutX="300" layoutY="10" fx:id="PayfeeButton" onAction="#payfee" text="Pay Fee"></Button>
+    <Button layoutX="10" layoutY="270" fx:id="UpdateDetailsButton" onAction="#updatedetails" text="Update your profile"></Button>
 </AnchorPane>
