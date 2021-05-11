@@ -11,8 +11,9 @@ public class Conference {
     protected Date callForPapers;
     protected Date proposalDeadline;
     protected Date fullpaperDeadline;
+    protected int phase;
 
-    public Conference(int id, String name, Date startDate, Date endDate, Date callForPapers, Date proposalDeadline, Date fullpaperDeadline) {
+    public Conference(int id, String name, Date startDate, Date endDate, Date callForPapers, Date proposalDeadline, Date fullpaperDeadline,int phase) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -20,6 +21,7 @@ public class Conference {
         this.callForPapers = callForPapers;
         this.proposalDeadline = proposalDeadline;
         this.fullpaperDeadline = fullpaperDeadline;
+        this.phase=phase;
     }
 
     @Override
@@ -33,6 +35,14 @@ public class Conference {
                 ", proposalDeadline=" + proposalDeadline +
                 ", fullpaperDeadline=" + fullpaperDeadline +
                 '}';
+    }
+
+    public int getPhase() {
+        return phase;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
     }
 
     public int getId() {

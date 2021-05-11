@@ -35,8 +35,8 @@ public class ConferenceRepo {
                 Date callforpapers = rs.getDate("callforpapers");
                 Date proposaldeadline = rs.getDate("proposaldeadline");
                 Date fullpaperdeadline = rs.getDate("fullpaperdeadline");
-
-                Conference jeanJacques = new Conference(id, name, startdate, enddate, callforpapers, proposaldeadline, fullpaperdeadline);
+                int phase=rs.getInt("phase");
+                Conference jeanJacques = new Conference(id, name, startdate, enddate, callforpapers, proposaldeadline, fullpaperdeadline,phase);
                 conferences.add(jeanJacques);
             }
         } catch (SQLException throwable) {
@@ -59,7 +59,8 @@ public class ConferenceRepo {
             Date callforpapers = rs.getDate("callforpapers");
             Date proposaldeadline = rs.getDate("proposaldeadline");
             Date fullpaperdeadline = rs.getDate("fullpaperdeadlien");
-            conference =new Conference(id, name, startdate, enddate, callforpapers, proposaldeadline, fullpaperdeadline);
+            int phase=rs.getInt("phase");
+            conference =new Conference(id, name, startdate, enddate, callforpapers, proposaldeadline, fullpaperdeadline,phase);
             conference.setId(id);
 
         } catch (SQLException throwable) {
@@ -69,7 +70,7 @@ public class ConferenceRepo {
     }
 
     public void update(Conference participant) {
-        String query = "update conference set name=?, startdate=?, enddate=?, callforpapers=?, proposaldeadline=?,fullpaperdeadline=? where id=?";
+        String query = "update conference set name=?, startdate=?, enddate=?, callforpapers=?, proposaldeadline=?,fullpaperdeadline=?, phase=? where id=?";
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(query)) {
             ps.setString(1, participant.getName());
@@ -78,7 +79,8 @@ public class ConferenceRepo {
             ps.setDate(4, (java.sql.Date) participant.getCallForPapers());
             ps.setDate(5, (java.sql.Date) participant.getProposalDeadline());
             ps.setDate(6, (java.sql.Date) participant.getFullpaperDeadline());
-            ps.setInt(7, participant.getId());
+            ps.setInt(7,participant.getPhase());
+            ps.setInt(8, participant.getId());
             ps.executeUpdate();
 
         } catch (SQLException throwable) {
