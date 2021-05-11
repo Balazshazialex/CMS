@@ -10,6 +10,10 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="sample.AfterLoginAuthor"
             prefHeight="520.0" prefWidth="816.0">
+    <TableView fx:id="conf_table" layoutX="300.0" layoutY="10.0" prefHeight="469.0" prefWidth="1000.0"
+               AnchorPane.bottomAnchor="35.399999999999977" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="10.0">
+
+    </TableView>
     <GridPane layoutX="10" layoutY="10">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -41,6 +45,7 @@
             <TextField fx:id="role" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         </children>
     </GridPane>
-    <Button layoutX="300" layoutY="10" fx:id="PayfeeButton" onAction="#payfee" text="Pay Fee"></Button>
+    <Button layoutX="140" layoutY="270" fx:id="PayfeeButton" onAction="#payfee" text="Pay Fee"></Button>
     <Button layoutX="10" layoutY="270" fx:id="UpdateDetailsButton" onAction="#updatedetails" text="Update your profile"></Button>
+    <Button layoutX="1350" layoutY="20" fx:id="EnterConference" onAction="#enterconference" text="Proceed to conference"></Button>
 </AnchorPane>

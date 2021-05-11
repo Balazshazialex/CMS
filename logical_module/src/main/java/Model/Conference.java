@@ -100,4 +100,6 @@ public class Conference {
     public void setFullpaperDeadline(Date fullpaperDeadline) {
         this.fullpaperDeadline = fullpaperDeadline;
     }
+
+
 }
