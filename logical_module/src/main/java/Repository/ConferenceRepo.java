@@ -102,7 +102,18 @@ public class ConferenceRepo {
             throwable.printStackTrace();
         }
     }
+    public void del(Integer id){
+        String query = "delete from conference where id=?";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
 
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+    }
     public int getNextId() {
         String query = "select max(id)+1 from conference";
         try (var connection = DriverManager.getConnection(url, username, password);

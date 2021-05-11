@@ -20,4 +20,12 @@ public class UserController {
     public boolean check_creds(String username, String password, String role){
         return repo.check_creds(username,password,role);
     }
+
+    public ConferenceParticipant findone(String username, String password) {
+        return repo.findone(username,password);
+    }
+
+    public void payfee(Integer id){
+        repo.payfee(id);
+    }
 }

@@ -54,11 +54,19 @@ public class Controller implements Initializable {
                 nextScreen = "/sample/AfterLoginSteeringCommitteeMember.fxml";
             } else if(role.equals("PC member")) {
                 nextScreen = "/sample/LoginForm.fxml";
+            } else if(role.equals("Author")) {
+                nextScreen = "/sample/AfterLoginAuthor.fxml";
             }
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(nextScreen));
             try {
                 Parent parent = loader.load();
+                if(role.equals("Author")){
+                    AfterLoginAuthor scene2Controller = loader.getController();
+                    var message=this.userController.findone(username,password);
+                    scene2Controller.send_message(message);
+                }
+
                 loginButton.getScene().setRoot(parent);
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);

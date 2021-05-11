@@ -58,6 +58,7 @@ public class AfterLoginSteeringCommitteeMember implements Initializable {
         this.populateConferencesList();
     }
 
+
     private void populateConferencesList() {
         this.conferencesList.getItems().clear();
         for(Conference conference: this.conferenceController.findAll()) {

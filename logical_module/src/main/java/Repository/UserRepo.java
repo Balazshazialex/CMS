@@ -88,7 +88,18 @@ public class UserRepo {
             throwable.printStackTrace();
         }
     }
+    public void payfee(Integer id){
+        String query = "update conferenceparticipant set  haspayedfee=true where id=?";
+        try(var connection = DriverManager.getConnection(url, username, password);
+            var ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
 
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+    }
     public boolean check_creds(String username, String password, String role){
         ArrayList<ConferenceParticipant> p= (ArrayList<ConferenceParticipant>) this.findAll();
         for (ConferenceParticipant x:p) {
@@ -96,4 +107,30 @@ public class UserRepo {
         }
         return false;
     }
+
+    public ConferenceParticipant findone(String username1, String password1) {
+        ConferenceParticipant participant = null;
+        String query = "select * from conferenceparticipant where username=? and password=?";
+        try(var connection = DriverManager.getConnection(url, username, password);
+            var ps = connection.prepareStatement(query)) {
+            ps.setString(1, username1);
+            ps.setString(2, password1);
+            var rs = ps.executeQuery();
+            rs.next();
+            Integer id=rs.getInt("id");
+            String name = rs.getString("name");
+            String username = rs.getString("username");
+            String password = rs.getString("password");
+            boolean hasPayedFee = rs.getBoolean("haspayedfee");
+            String cardNumber=rs.getString("cardnumber");
+            String affiliation=rs.getString("affiliation");
+            String webPage=rs.getString("webpage");
+            String role = rs.getString("role");
+            participant =new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage,role);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return participant;
+    }
+
 }

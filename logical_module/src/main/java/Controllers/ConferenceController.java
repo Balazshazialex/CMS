@@ -22,5 +22,8 @@ public class ConferenceController {
     public void add(Conference conference){
         repo.add(conference);
     }
+    public void remove(Integer id){
+        repo.del(id);
+    }
     public int getNextId(){return repo.getNextId();}
 }
