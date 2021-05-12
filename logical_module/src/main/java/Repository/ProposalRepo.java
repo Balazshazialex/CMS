@@ -1,9 +1,6 @@
 package Repository;
 
-import Model.Conference;
-import Model.ConferenceParticipant;
 import Model.Proposal;
-
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -130,18 +127,19 @@ public class ProposalRepo {
             ps.setInt(1, authorId);
             ps.setInt(2, conferenceId);
             var rs = ps.executeQuery();
-            rs.next();
-            int id = rs.getInt("id");
-            String name = rs.getString("name");
-            String listOfAuthors = rs.getString("listauthors");
-            String metaInfo = rs.getString("metainfo");
-            String abstractPaper = rs.getString("abstract");
-            String fullPaper = rs.getString("fullpaper");
-            String keywords = rs.getString("keywords");
-            String topics = rs.getString("topics");
-            proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
-                    abstractPaper, fullPaper, keywords, topics);
 
+            if(rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String listOfAuthors = rs.getString("listauthors");
+                String metaInfo = rs.getString("metainfo");
+                String abstractPaper = rs.getString("abstract");
+                String fullPaper = rs.getString("fullpaper");
+                String keywords = rs.getString("keywords");
+                String topics = rs.getString("topics");
+                proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
+                        abstractPaper, fullPaper, keywords, topics);
+            }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
             return null;
