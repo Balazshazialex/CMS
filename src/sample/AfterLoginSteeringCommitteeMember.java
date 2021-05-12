@@ -4,10 +4,13 @@ import Controllers.ConferenceController;
 import Model.Conference;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -119,5 +122,22 @@ public class AfterLoginSteeringCommitteeMember implements Initializable {
         Conference conference = new Conference(id, name, startDate, endDate, callForPapers, proposalDeadline, fullPaperDeadline, phase);
         this.conferenceController.update(conference);
         this.populateConferencesList();
+    }
+
+    public void addPCMembersToConference() {
+        var index = this.conf_table.getSelectionModel().getSelectedIndex();
+        Conference conference= (Conference) this.conf_table.getItems().get(index);
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/AddPCMembers.fxml"));
+            Parent parent = loader.load();
+            AddPCMembers controller = loader.getController();
+            controller.setSelectedConference(conference);
+            this.conf_table.getScene().setRoot(parent);
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 }
