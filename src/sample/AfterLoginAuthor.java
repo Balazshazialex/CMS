@@ -155,7 +155,7 @@ public class AfterLoginAuthor implements Initializable {
         try {
             Parent parent = loader.load();
             sample.ConferenceController scene2Controller = loader.getController();
-            scene2Controller.send_message(conference);
+            scene2Controller.send_message(conference,this.c);
             this.conf_table.getScene().setRoot(parent);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);

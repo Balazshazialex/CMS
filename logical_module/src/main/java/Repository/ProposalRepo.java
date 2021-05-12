@@ -20,7 +20,7 @@ public class ProposalRepo {
         this.password = password;
     }
 
-    public void add(Proposal proposal){
+    public void add(Proposal proposal) {
         String query = "insert into " +
                 "proposal(conferenceid, authorid, name, listauthors, metainfo, abstract, fullpaper, keywords, topics) " +
                 "values(?,?,?,?,?,?,?,?,?)";
@@ -76,8 +76,8 @@ public class ProposalRepo {
     public Proposal findOne(Integer id) {
         Proposal proposal = null;
         String query = "select * from proposal where id=?";
-        try(var connection = DriverManager.getConnection(url, username, password);
-            var ps = connection.prepareStatement(query)) {
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             var rs = ps.executeQuery();
             rs.next();
@@ -103,8 +103,8 @@ public class ProposalRepo {
         String query = "update proposal " +
                 "set name=?, listauthors=?, metainfo=?, abstract=?, fullpaper=?, keywords=?, topics=? " +
                 "where id=?";
-        try(var connection = DriverManager.getConnection(url, username, password);
-            var ps = connection.prepareStatement(query)) {
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
 
             ps.setString(1, proposal.getName());
             ps.setString(2, proposal.getListOfAuthors());
@@ -125,8 +125,8 @@ public class ProposalRepo {
     public Proposal findOneByAuthorIdConferenceId(Integer authorId, Integer conferenceId) {
         Proposal proposal = null;
         String query = "select * from proposal where authorid=? and conferenceid=?";
-        try(var connection = DriverManager.getConnection(url, username, password);
-            var ps = connection.prepareStatement(query)) {
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
             ps.setInt(1, authorId);
             ps.setInt(2, conferenceId);
             var rs = ps.executeQuery();
@@ -144,7 +144,23 @@ public class ProposalRepo {
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
+            return null;
         }
         return proposal;
+    }
+
+    public int getNextId() {
+        String query = "select max(id)+1 from proposal";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query);
+             var result = ps.executeQuery()) {
+            result.next();
+            return result.getInt(1);
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return 1;
     }
 }
