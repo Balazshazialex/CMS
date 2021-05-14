@@ -87,7 +87,6 @@ public class ConferenceController implements Initializable {
 
     public void update_proposal(ActionEvent actionEvent){
         System.out.println("haha");
-
     }
     private void set_text_title() {
         this.phase_name.setText("Conference: " + this.conf.getName() + " is in phase " + this.conf.getPhase());

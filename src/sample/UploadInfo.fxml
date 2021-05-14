@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="CENTER" prefHeight="319.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UploadInfo">
+   <columnConstraints>
+      <ColumnConstraints minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="233.00000000000003" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="67.0" minHeight="0.0" prefHeight="43.400000000000034" />
+      <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="43.0" />
+   </rowConstraints>
+   <children>
+      <GridPane alignment="CENTER" prefHeight="224.0" prefWidth="455.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="114.19999237060546" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="182.6000076293945" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="24.0" prefWidth="183.0" text="Name" />
+            <Label prefHeight="27.0" prefWidth="195.0" text="Affiliation" GridPane.rowIndex="1" />
+            <Label prefHeight="28.0" prefWidth="187.0" text="Web-page" GridPane.rowIndex="2" />
+            <Label prefHeight="26.0" prefWidth="169.0" text="Username" GridPane.rowIndex="4" />
+            <Label prefHeight="26.0" prefWidth="166.0" text="Password" GridPane.rowIndex="5" />
+            <TextField fx:id="name" prefHeight="26.0" prefWidth="37.0" GridPane.columnIndex="1" />
+            <TextField fx:id="affiliation" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="webpage" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="id" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label prefHeight="18.0" prefWidth="158.0" text="Conference ID" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <Button fx:id="submitButton" alignment="CENTER" mnemonicParsing="false" onAction="#submit" prefHeight="21.0" prefWidth="54.0" text="Submit" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" prefHeight="26.0" prefWidth="53.0" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+   </children>
+</GridPane>

@@ -58,7 +58,7 @@ public class ConferenceRepo {
             Date enddate = rs.getDate("enddate");
             Date callforpapers = rs.getDate("callforpapers");
             Date proposaldeadline = rs.getDate("proposaldeadline");
-            Date fullpaperdeadline = rs.getDate("fullpaperdeadlien");
+            Date fullpaperdeadline = rs.getDate("fullpaperdeadline");
             int phase=rs.getInt("phase");
             conference =new Conference(id, name, startdate, enddate, callforpapers, proposaldeadline, fullpaperdeadline,phase);
             conference.setId(id);

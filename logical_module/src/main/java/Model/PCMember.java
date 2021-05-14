@@ -1,30 +1,23 @@
 package Model;
 
-public class PCMember  extends ConferenceParticipant implements IPCMember{
+public class PCMember extends ConferenceParticipant {
+
+    public PCMember(int id, String name, String username, String password, boolean hasPayedFee, String cardNumber, String affiliation, String webPage, String role) {
+        super(id, name, username, password, hasPayedFee,cardNumber,affiliation,webPage,role);
+    }
 
     public PCMember(int id, String name, String username, String password) {
-        super(id, name, username, password);
+        super(id,name,username,password);
     }
 
-    @Override
-    public void uploadPersonalInformation(String name, String affiliation, String emailAddress, String personalWebPage) {
-        this.setName(name);
-        this.setUsername(emailAddress);
-        this.setAffiliation(affiliation);
-        this.setWebPage(webPage);
-    }
-
-    @Override
     public void evaluatePaper() {
 
     }
 
-    @Override
     public void bidProposal() {
 
     }
 
-    @Override
     public void chat() {
 
     }

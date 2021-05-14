@@ -48,12 +48,12 @@ public class Controller implements Initializable {
         String username = this.usernameField.getText();
         String password = this.passwordField.getText();
         String role = this.loginRoleLabel.getText();
-        if(this.userController.check_creds(username, password,role)) {
+        if(this.userController.checkCreds(username, password,role)) {
             String nextScreen = "/sample/LoginForm.fxml";
             if(role.equals("Steering committee member")) {
                 nextScreen = "/sample/AfterLoginSteeringCommitteeMember.fxml";
             } else if(role.equals("PC member")) {
-                nextScreen = "/sample/LoginForm.fxml";
+                nextScreen = "/sample/AfterLoginPCMember.fxml";
             } else if(role.equals("Author")) {
                 nextScreen = "/sample/AfterLoginAuthor.fxml";
             }
@@ -63,7 +63,7 @@ public class Controller implements Initializable {
                 Parent parent = loader.load();
                 if(role.equals("Author")){
                     AfterLoginAuthor scene2Controller = loader.getController();
-                    var message=this.userController.findone(username,password);
+                    var message=this.userController.findOne(username,password);
                     scene2Controller.send_message(message);
                 }
 

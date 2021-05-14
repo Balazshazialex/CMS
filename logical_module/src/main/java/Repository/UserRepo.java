@@ -88,7 +88,7 @@ public class UserRepo {
             throwable.printStackTrace();
         }
     }
-    public void payfee(Integer id){
+    public void payFee(Integer id){
         String query = "update conferenceparticipant set  haspayedfee=true where id=?";
         try(var connection = DriverManager.getConnection(url, username, password);
             var ps = connection.prepareStatement(query)) {
@@ -100,7 +100,7 @@ public class UserRepo {
         }
 
     }
-    public boolean check_creds(String username, String password, String role){
+    public boolean checkCreds(String username, String password, String role){
         ArrayList<ConferenceParticipant> p= (ArrayList<ConferenceParticipant>) this.findAll();
         for (ConferenceParticipant x:p) {
             if(x.getUsername().equals(username) && x.getPassword().equals(password) && x.getRole().equals(role)) return true;
@@ -108,7 +108,7 @@ public class UserRepo {
         return false;
     }
 
-    public ConferenceParticipant findone(String username1, String password1) {
+    public ConferenceParticipant findOne(String username1, String password1) {
         ConferenceParticipant participant = null;
         String query = "select * from conferenceparticipant where username=? and password=?";
         try(var connection = DriverManager.getConnection(url, username, password);

@@ -106,6 +106,13 @@ public class ConferenceParticipant {
 
     }
 
+    public void uploadPersonalInformation(String name, String affiliation, String emailAddress, String personalWebPage) {
+        this.setName(name);
+        this.setUsername(emailAddress);
+        this.setAffiliation(affiliation);
+        this.setWebPage(personalWebPage);
+    }
+
     @Override
     public String toString() {
         return "ConferenceParticipant{" +
