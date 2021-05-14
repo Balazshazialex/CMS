@@ -56,6 +56,8 @@ public class Controller implements Initializable {
                 nextScreen = "/sample/AfterLoginPCMember.fxml";
             } else if(role.equals("Author")) {
                 nextScreen = "/sample/AfterLoginAuthor.fxml";
+            } else if(role.equals("Chair/ co-chair")) {
+                nextScreen = "/sample/AfterLoginChair.fxml";
             }
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(nextScreen));
