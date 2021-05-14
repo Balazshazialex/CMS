@@ -16,16 +16,12 @@ public class UserController {
         return repo.findAll();
     }
     public ConferenceParticipant findOne(int id) {return repo.findOne(id);}
+    public ConferenceParticipant findOne(String username, String password) {return repo.findOne(username,password);}
     public void update(ConferenceParticipant participant) {repo.update(participant);}
-    public boolean check_creds(String username, String password, String role){
-        return repo.check_creds(username,password,role);
+    public boolean checkCreds(String username, String password, String role){
+        return repo.checkCreds(username,password,role);
     }
-
-    public ConferenceParticipant findone(String username, String password) {
-        return repo.findone(username,password);
-    }
-
-    public void payfee(Integer id){
-        repo.payfee(id);
+    public void payFee(Integer id){
+        repo.payFee(id);
     }
 }

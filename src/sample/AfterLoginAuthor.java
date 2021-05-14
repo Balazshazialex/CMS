@@ -71,8 +71,8 @@ public class AfterLoginAuthor implements Initializable {
             this.PayfeeButton.setVisible(false);
         }
     }
-    public void payfee(ActionEvent actionEvent) {
-        this.userController.payfee(this.c.getId());
+    public void payFee(ActionEvent actionEvent) {
+        this.userController.payFee(this.c.getId());
         this.c= userController.findOne(this.c.getId());
         this.hpfee.setText(String.valueOf(this.c.isHasPayedFee()));
         this.hpfee.setEditable(false);
