@@ -92,7 +92,7 @@ public class UploadProposal implements Initializable {
             this.proposalController.add(proposal);
             this.populateTextFields(proposal);
         }
-    }
+  }
 
     public void updateProposal() {
         Date dateNow = new Date();
@@ -136,6 +136,8 @@ public class UploadProposal implements Initializable {
         loader.setLocation(getClass().getResource(nextScreen));
         try {
             Parent parent = loader.load();
+            AfterLoginAuthor scene2Controller = loader.getController();
+            scene2Controller.send_message(this.author);
             this.backButton.getScene().setRoot(parent);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);

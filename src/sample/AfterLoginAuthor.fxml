@@ -45,7 +45,7 @@
             <TextField fx:id="role" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         </children>
     </GridPane>
-    <Button layoutX="140" layoutY="270" fx:id="PayfeeButton" onAction="#payfee" text="Pay Fee"></Button>
+    <Button layoutX="140" layoutY="270" fx:id="PayfeeButton" onAction="#payFee" text="Pay Fee"></Button>
     <Button layoutX="10" layoutY="270" fx:id="UpdateDetailsButton" onAction="#updatedetails" text="Update your profile"></Button>
     <Button layoutX="1350" layoutY="20" fx:id="EnterConference" onAction="#enterconference" text="Proceed to conference"></Button>
 </AnchorPane>
