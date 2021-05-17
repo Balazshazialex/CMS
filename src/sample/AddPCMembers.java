@@ -76,4 +76,13 @@ public class AddPCMembers implements Initializable {
         }
     }
 
+    public void removePCMember() {
+        var selectedIndex = this.addedPCMembers.getSelectionModel().getSelectedIndex();
+        var PCmember = this.participants.get(selectedIndex);
+        this.pcMembersController.removePCMember(this.selectedConference, PCmember);
+
+        this.addedPCMembers.getItems().remove(selectedIndex);
+        this.selectedParticipants.remove(PCmember);
+    }
+
 }

@@ -80,4 +80,19 @@ public class PCMembersRepo {
 
         return participants;
     }
+
+    public void removePCMember(Conference conference, ConferenceParticipant PCMember) {
+        String query = "delete from pcmembers where conferenceid = ? and participantid = ?";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+
+            ps.setInt(1, conference.getId());
+            ps.setInt(2, PCMember.getId());
+            ps.executeUpdate();
+
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
 }
