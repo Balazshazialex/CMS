@@ -60,6 +60,24 @@ public class BidRepo {
         return conference;
     }
 
+    public Bid findOne_cid_pid(Integer pid, Integer cid) {
+        Bid conference = null;
+        String query = "select * from bid where pid=? and cid=?";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+            ps.setInt(1, pid);
+            ps.setInt(2, cid);
+            var rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt("id");
+            int evaluation = rs.getInt("evaluation");
+            conference = new Bid(id, pid, cid, evaluation);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return conference;
+    }
+
     public void add(Bid conference) {
         String query = "insert into bid(pid,evaluation,cid,id) values(?,?,?,?)";
         try (var connection = DriverManager.getConnection(url, username, password);

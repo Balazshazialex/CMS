@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -43,13 +44,15 @@ public class ShowAllPapersReview implements Initializable {
     public TextArea metaInfo;
     @FXML
     public TextField review;
+    @FXML
+    public Button submit_review_button;
 
     private ConferenceParticipant c;
     private Conference conferece;
     private ProposalController proposalController;
     private ArrayList<Proposal> proposals;
     private BidController bidController;
-    private Proposal p;
+    private Proposal p=null;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.proposalController = new ProposalController();
@@ -60,6 +63,19 @@ public class ShowAllPapersReview implements Initializable {
         this.conferece = conferen;
         this.c = c;
         fill_out_table();
+        hide_add_review();
+    }
+
+    private void hide_add_review() {
+        if(this.p!=null) {
+            Bid bid=bidController.findOne_cidpid(this.p.getId(), this.c.getId());
+            if (bid != null) {
+                this.submit_review_button.setVisible(false);
+                this.review.setText(String.valueOf(bid.getEvaluation()));
+            } else {
+                this.submit_review_button.setVisible(true);
+            }
+        }
     }
 
     private void fill_out_table() {
@@ -101,6 +117,7 @@ public class ShowAllPapersReview implements Initializable {
             this.fullPaper.setText(proposal.getFullPaper());
             this.fullPaper.setEditable(false);
             this.p=proposal;
+            hide_add_review();
         }
     }
 

@@ -16,5 +16,6 @@ public class BidController {
     public void add(Bid proposal) { repo.add(proposal); }
     public List<Bid> findAll() { return repo.findAll(); }
     public Bid findOne(int id) { return repo.findOne(id); }
+    public Bid findOne_cidpid(int pid,int cid) { return repo.findOne_cid_pid(pid,cid); }
     public int getNextId(){return repo.getNextId();}
 }
