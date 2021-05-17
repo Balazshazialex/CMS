@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.ReviewPaper"
+            prefHeight="400.0" prefWidth="600.0">
+    <TableView fx:id="conf_table" layoutX="20.0" layoutY="45.0"
+               prefHeight="469.0" prefWidth="1000.0" AnchorPane.bottomAnchor="5.399999999999977"
+               AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="45.0">
+
+    </TableView>
+    <Button fx:id="show_proposals" layoutY="45" layoutX="1050" onAction="#show_all_proposals">View all proposals from this conference</Button>
+    <Button fx:id="back" layoutY="75" layoutX="1050" onAction="#back">Back</Button>
+</AnchorPane>

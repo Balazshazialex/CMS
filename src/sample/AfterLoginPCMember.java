@@ -1,6 +1,7 @@
 package sample;
 
-import Controllers.UserController;
+import Model.ConferenceParticipant;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AfterLoginPCMember implements Initializable {
-
+    private ConferenceParticipant c;
     @FXML
     public Button uploadInfoButton;
 
@@ -61,4 +62,25 @@ public class AfterLoginPCMember implements Initializable {
         }
     }
 
+
+    public void send_message( ConferenceParticipant conferenceParticipant) {
+        this.c = conferenceParticipant;
+    }
+
+
+    public void ReviewPaper(ActionEvent actionEvent) {
+        String nextScreen = "/sample/ReviewPaper.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(nextScreen));
+        try {
+            Parent parent = loader.load();
+            ReviewPaper scene2Controller = loader.getController();
+            scene2Controller.send_message(c);
+            this.bidProposalsButton.getScene().setRoot(parent);
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
 }
