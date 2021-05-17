@@ -37,10 +37,14 @@
             </PasswordField>
             <Button fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" onAction="#loginButtonClick" prefHeight="25.0" prefWidth="84.0" text="Login">
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="20.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="86.0" text="Exite moi" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="86.0" text="Exite moi">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#goToCreateAccount" prefHeight="26.0" prefWidth="102.0" text="Create account" />
          </children></VBox>
    </children>
    <columnConstraints>

@@ -21,7 +21,7 @@ public class UserController {
     public boolean checkCreds(String username, String password, String role){
         return repo.checkCreds(username,password,role);
     }
-    public void payFee(Integer id){
-        repo.payFee(id);
-    }
+    public void payFee(Integer id) { repo.payFee(id);}
+    public void add(ConferenceParticipant participant) { this.repo.add(participant); }
+    public int getNextId() { return this.repo.getNextId(); }
 }

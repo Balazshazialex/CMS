@@ -90,4 +90,16 @@ public class Controller implements Initializable {
         this.loginRoleLabel.setTextAlignment(TextAlignment.CENTER);
     }
 
+    public void goToCreateAccount() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/CreateAccount.fxml"));
+        try {
+            Parent parent = loader.load();
+            loginButton.getScene().setRoot(parent);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
 }

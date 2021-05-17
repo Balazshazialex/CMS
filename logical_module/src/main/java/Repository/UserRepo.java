@@ -133,4 +133,39 @@ public class UserRepo {
         return participant;
     }
 
+    public void add(ConferenceParticipant participant) {
+        String query = "insert into conferenceparticipant(id,name, username, password, haspayedfee, role) " +
+                "values(?,?,?,?,?,?)";
+        try(var connection = DriverManager.getConnection(url, username, password);
+            var ps = connection.prepareStatement(query)) {
+
+            ps.setInt(1, participant.getId());
+            ps.setString(2, participant.getName());
+            ps.setString(3, participant.getUsername());
+            ps.setString(4, participant.getPassword());
+            ps.setBoolean(5, participant.isHasPayedFee());
+            ps.setString(6, participant.getRole());
+
+            ps.executeUpdate();
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    public int getNextId() {
+        String query = "select max(id)+1 from conferenceparticipant";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query);
+             var result = ps.executeQuery()) {
+            result.next();
+            return result.getInt(1);
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+        return 1;
+    }
+
 }
