@@ -1,4 +1,7 @@
 package Model;
+
+import java.util.Objects;
+
 public class ConferenceParticipant {
     protected int id;
     protected String name;
@@ -126,5 +129,21 @@ public class ConferenceParticipant {
                 ", webPage='" + webPage + '\'' +
                 ", role='" + role + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConferenceParticipant that = (ConferenceParticipant) o;
+        return id == that.id && hasPayedFee == that.hasPayedFee && Objects.equals(name, that.name) &&
+                Objects.equals(username, that.username) && Objects.equals(password, that.password) &&
+                Objects.equals(cardNumber, that.cardNumber) && Objects.equals(affiliation, that.affiliation) &&
+                Objects.equals(webPage, that.webPage) && Objects.equals(role, that.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, username, password, hasPayedFee, cardNumber, affiliation, webPage, role);
     }
 }

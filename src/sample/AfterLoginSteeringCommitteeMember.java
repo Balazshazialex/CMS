@@ -132,7 +132,7 @@ public class AfterLoginSteeringCommitteeMember implements Initializable {
             loader.setLocation(getClass().getResource("/sample/AddPCMembers.fxml"));
             Parent parent = loader.load();
             AddPCMembers controller = loader.getController();
-            controller.setSelectedConference(conference);
+            controller.setup(conference);
             this.conf_table.getScene().setRoot(parent);
 
         } catch (IOException e) {

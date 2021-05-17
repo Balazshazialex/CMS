@@ -26,5 +26,4 @@ public class ConferenceController {
         repo.del(id);
     }
     public int getNextId(){return repo.getNextId();}
-    public void addPCMembers(Conference conference, List<ConferenceParticipant> participants) {this.repo.addPCMembers(conference, participants);}
 }
