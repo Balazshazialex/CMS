@@ -73,6 +73,7 @@ public class ShowAllPapersReview implements Initializable {
                 this.submit_review_button.setVisible(false);
                 this.review.setText(String.valueOf(bid.getEvaluation()));
             } else {
+                this.review.setText("");
                 this.submit_review_button.setVisible(true);
             }
         }
@@ -122,7 +123,7 @@ public class ShowAllPapersReview implements Initializable {
     }
 
     public void submitreview(ActionEvent actionEvent) {
-        Bid bid=new Bid(this.bidController.getNextId(),this.p.getId(),this.c.getId(),Integer.parseInt(this.review.getText()));
+        Bid bid=new Bid(this.bidController.getNextId(),this.p.getId(),this.c.getId(),this.review.getText());
         bidController.add(bid);
     }
 }

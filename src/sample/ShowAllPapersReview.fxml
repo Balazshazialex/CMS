@@ -12,7 +12,7 @@
             prefHeight="600.0" prefWidth="600.0">
     <ChoiceBox fx:id="choicebox" layoutX="10" layoutY="10"></ChoiceBox>
     <Button fx:id="load_proposal_button" onAction="#loadProposal" layoutX="150" layoutY="10">Load Proposal</Button>
-    <Button fx:id="submit_review_button" onAction="#submitreview" layoutX="250" layoutY="10">Load Proposal</Button>
+    <Button fx:id="submit_review_button" onAction="#submitreview" layoutX="250" layoutY="10">Submit Review</Button>
     <GridPane layoutX="32.0" layoutY="8.0" prefHeight="488.0" prefWidth="469.0" AnchorPane.bottomAnchor="15.0"
               AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="50.0">
         <columnConstraints>

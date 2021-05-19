@@ -73,6 +73,11 @@ public class Controller implements Initializable {
                     var message=this.userController.findOne(username,password);
                     scene2Controller.send_message(message);
                 }
+                if(role.equals("Chair/ co-chair")){
+                    AfterLoginChair scene2Controller = loader.getController();
+                    var message=this.userController.findOne(username,password);
+                    scene2Controller.send_message(message);
+                }
                 loginButton.getScene().setRoot(parent);
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);

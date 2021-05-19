@@ -30,7 +30,7 @@ public class BidRepo {
                 int id = rs.getInt("id");
                 int pid = rs.getInt("pid");
                 int cid = rs.getInt("cid");
-                int evaluation = rs.getInt("evaluation");
+                String evaluation = rs.getString("evaluation");
 
                 Bid jeanJacques = new Bid(id, pid, cid, evaluation);
                 conferences.add(jeanJacques);
@@ -51,7 +51,7 @@ public class BidRepo {
             rs.next();
             int pid = rs.getInt("pid");
             int cid = rs.getInt("cid");
-            int evaluation = rs.getInt("evaluation");
+            var evaluation = rs.getString("evaluation");
             conference = new Bid(id, pid, cid, evaluation);
 
         } catch (SQLException throwable) {
@@ -70,7 +70,7 @@ public class BidRepo {
             var rs = ps.executeQuery();
             rs.next();
             int id = rs.getInt("id");
-            int evaluation = rs.getInt("evaluation");
+            var evaluation = rs.getString("evaluation");
             conference = new Bid(id, pid, cid, evaluation);
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -83,7 +83,7 @@ public class BidRepo {
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(query)) {
             ps.setInt(1, conference.getPid());
-            ps.setInt(2, conference.getEvaluation());
+            ps.setString(2, conference.getEvaluation());
             ps.setInt(3, conference.getCid());
             ps.setInt(4, conference.getId());
             ps.executeUpdate();

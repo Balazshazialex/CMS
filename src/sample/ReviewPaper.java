@@ -84,36 +84,74 @@ public class ReviewPaper implements Initializable {
     }
 
     public void show_all_proposals(ActionEvent actionEvent) {
-        int  index = this.conf_table.getSelectionModel().getSelectedIndex();
-        Conference conference= (Conference) this.conf_table.getItems().get(index);
-        String nextScreen = "/sample/ShowAllPapersReview.fxml";
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(nextScreen));
-        try {
-            Parent parent = loader.load();
-            //sample.ConferenceController scene2Controller = loader.getController();
-            sample.ShowAllPapersReview scene2Controller = loader.getController();
-            //scene2Controller.send_message(conference);
-            scene2Controller.setConference(conference, this.c);
-            this.conf_table.getScene().setRoot(parent);
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
-            alert.showAndWait();
+        if(this.c.getRole().equals("PC member")){
+            int  index = this.conf_table.getSelectionModel().getSelectedIndex();
+            Conference conference= (Conference) this.conf_table.getItems().get(index);
+            String nextScreen = "/sample/ShowAllPapersReview.fxml";
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(nextScreen));
+            try {
+                Parent parent = loader.load();
+                //sample.ConferenceController scene2Controller = loader.getController();
+                sample.ShowAllPapersReview scene2Controller = loader.getController();
+                //scene2Controller.send_message(conference);
+                scene2Controller.setConference(conference, this.c);
+                this.conf_table.getScene().setRoot(parent);
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
         }
+        else{
+            int  index = this.conf_table.getSelectionModel().getSelectedIndex();
+            Conference conference= (Conference) this.conf_table.getItems().get(index);
+            String nextScreen = "/sample/AllReviewsProposal.fxml";
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(nextScreen));
+            try {
+                Parent parent = loader.load();
+                //sample.ConferenceController scene2Controller = loader.getController();
+                sample.AllReviewsProposal scene2Controller = loader.getController();
+                //scene2Controller.send_message(conference);
+                scene2Controller.setConference(conference, this.c);
+                this.conf_table.getScene().setRoot(parent);
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
+        }
+
     }
 
     public void back(ActionEvent actionEvent) {
-        String nextScreen = "/sample/AfterLoginPCMember.fxml";
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(nextScreen));
-        try {
-            Parent parent = loader.load();
-            AfterLoginPCMember scene2Controller = loader.getController();
-            scene2Controller.send_message(this.c);
-            this.back.getScene().setRoot(parent);
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
-            alert.showAndWait();
+        if(this.c.getRole().equals("PC member")){
+            String nextScreen = "/sample/AfterLoginPCMember.fxml";
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(nextScreen));
+            try {
+                Parent parent = loader.load();
+                AfterLoginPCMember scene2Controller = loader.getController();
+                scene2Controller.send_message(this.c);
+                this.back.getScene().setRoot(parent);
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
         }
+        else{
+            String nextScreen = "/sample/AfterLoginChair.fxml";
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(nextScreen));
+            try {
+                Parent parent = loader.load();
+                AfterLoginChair scene2Controller = loader.getController();
+                scene2Controller.send_message(this.c);
+                this.back.getScene().setRoot(parent);
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
+        }
+
     }
 }

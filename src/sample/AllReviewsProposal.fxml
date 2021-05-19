@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="sample.AllReviewsProposal"
+            prefHeight="400.0" prefWidth="600.0">
+    <ChoiceBox fx:id="choicebox" layoutX="10" layoutY="10"></ChoiceBox>
+    <Button fx:id="load_proposal_button" onAction="#loadReviews" layoutX="150" layoutY="10">Load Reviews for this proposal</Button>
+    <Button fx:id="request_eval_button" onAction="#requesteval" layoutX="350" layoutY="10">Request closer look</Button>
+    <ListView fx:id="reviewsList" layoutX="30.0" layoutY="10.0" prefHeight="469.0" prefWidth="450.0" AnchorPane.bottomAnchor="5.399999999999977" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="45.0" />
+
+</AnchorPane>

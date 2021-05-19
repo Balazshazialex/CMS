@@ -57,9 +57,9 @@ public class ProposalRepo {
                 String fullPaper = rs.getString("fullpaper");
                 String keywords = rs.getString("keywords");
                 String topics = rs.getString("topics");
-
+                boolean bool=rs.getBoolean("closer_eval");
                 Proposal proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
-                        abstractPaper, fullPaper, keywords, topics);
+                        abstractPaper, fullPaper, keywords, topics,bool);
                 proposals.add(proposal);
 
             }
@@ -87,8 +87,9 @@ public class ProposalRepo {
             String fullPaper = rs.getString("fullpaper");
             String keywords = rs.getString("keywords");
             String topics = rs.getString("topics");
+            boolean bool=rs.getBoolean("closer_eval");
             proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
-                    abstractPaper, fullPaper, keywords, topics);
+                    abstractPaper, fullPaper, keywords, topics,bool);
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -118,6 +119,16 @@ public class ProposalRepo {
             throwable.printStackTrace();
         }
     }
+    public void updaterequest(int id) {
+        String query = "update proposal set closer_eval=true where id=?";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
 
     public Proposal findOneByAuthorIdConferenceId(Integer authorId, Integer conferenceId) {
         Proposal proposal = null;
@@ -137,8 +148,9 @@ public class ProposalRepo {
                 String fullPaper = rs.getString("fullpaper");
                 String keywords = rs.getString("keywords");
                 String topics = rs.getString("topics");
+                boolean bool=rs.getBoolean("closer_eval");
                 proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
-                        abstractPaper, fullPaper, keywords, topics);
+                        abstractPaper, fullPaper, keywords, topics,bool);
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();

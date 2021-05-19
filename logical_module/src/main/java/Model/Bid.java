@@ -4,9 +4,9 @@ public class Bid {
     private int id;
     private int pid;
     private int cid;
-    private int evaluation;
+    private String evaluation;
     //pid - proposal id, cid- conf participant id
-    public Bid(int id, int pid, int cid, int evaluation) {
+    public Bid(int id, int pid, int cid, String evaluation) {
         this.id = id;
         this.pid = pid;
         this.cid = cid;
@@ -37,11 +37,11 @@ public class Bid {
         this.cid = cid;
     }
 
-    public int getEvaluation() {
+    public String getEvaluation() {
         return evaluation;
     }
 
-    public void setEvaluation(int evaluation) {
+    public void setEvaluation(String evaluation) {
         this.evaluation = evaluation;
     }
 }
