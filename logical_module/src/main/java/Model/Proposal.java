@@ -12,6 +12,31 @@ public class Proposal {
     private String fullPaper;
     private String keywords;
     private String topics;
+    private boolean request_eval = false;
+
+    public Proposal(int id, int conferenceId, int authorId, String name,
+                    String listOfAuthors, String metaInfo, String abstractPaper,
+                    String fullPaper, String keywords, String topics, boolean request_eval) {
+        this.id = id;
+        this.conferenceId = conferenceId;
+        this.authorId = authorId;
+        this.name = name;
+        this.listOfAuthors = listOfAuthors;
+        this.metaInfo = metaInfo;
+        this.abstractPaper = abstractPaper;
+        this.fullPaper = fullPaper;
+        this.keywords = keywords;
+        this.topics = topics;
+        this.request_eval = request_eval;
+    }
+
+    public boolean isRequest_eval() {
+        return request_eval;
+    }
+
+    public void setRequest_eval(boolean request_eval) {
+        this.request_eval = request_eval;
+    }
 
     public Proposal(int id, int conferenceId, int authorId, String name, String listOfAuthors, String metaInfo,
                     String abstractPaper, String fullPaper, String keywords, String topics) {

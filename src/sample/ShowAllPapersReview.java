@@ -13,13 +13,16 @@ import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
@@ -46,6 +49,12 @@ public class ShowAllPapersReview implements Initializable {
     public TextField review;
     @FXML
     public Button submit_review_button;
+    @FXML
+    public Button update_review_button;
+    @FXML
+    public Button show_reviews_button;
+    @FXML
+    public Button back;
 
     private ConferenceParticipant c;
     private Conference conferece;
@@ -72,9 +81,15 @@ public class ShowAllPapersReview implements Initializable {
             if (bid != null) {
                 this.submit_review_button.setVisible(false);
                 this.review.setText(String.valueOf(bid.getEvaluation()));
+                if(this.p.isRequest_eval()){
+                    this.update_review_button.setVisible(true);
+                }
+                this.show_reviews_button.setVisible(true);
             } else {
                 this.review.setText("");
                 this.submit_review_button.setVisible(true);
+                this.update_review_button.setVisible(false);
+                this.show_reviews_button.setVisible(false);
             }
         }
     }
@@ -104,6 +119,7 @@ public class ShowAllPapersReview implements Initializable {
             }
         }
         if (proposal != null) {
+
             this.name.setText(proposal.getName());
             this.name.setEditable(false);
             this.listOfAuthors.setText(proposal.getListOfAuthors());
@@ -118,6 +134,10 @@ public class ShowAllPapersReview implements Initializable {
             this.fullPaper.setText(proposal.getFullPaper());
             this.fullPaper.setEditable(false);
             this.p=proposal;
+            if(proposal.isRequest_eval()){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "This proposal needs to be re-checked", ButtonType.OK);
+                alert.showAndWait();
+            }
             hide_add_review();
         }
     }
@@ -125,5 +145,46 @@ public class ShowAllPapersReview implements Initializable {
     public void submitreview(ActionEvent actionEvent) {
         Bid bid=new Bid(this.bidController.getNextId(),this.p.getId(),this.c.getId(),this.review.getText());
         bidController.add(bid);
+    }
+
+    public void updatereview(ActionEvent actionEvent) {
+        Bid bid=bidController.findOne_cidpid(this.p.getId(), this.c.getId());
+        this.bidController.update(bid.getId(),this.review.getText());
+        this.proposalController.canceleval(this.p.getId());
+        this.update_review_button.setVisible(false);
+        this.p.setRequest_eval(false);
+        hide_add_review();
+    }
+
+    public void showreviews(ActionEvent actionEvent) {
+        String nextScreen = "/sample/AllReviews.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(nextScreen));
+        try {
+            Parent parent = loader.load();
+            //sample.ConferenceController scene2Controller = loader.getController();
+            sample.AllReviews scene2Controller = loader.getController();
+            //scene2Controller.send_message(conference);
+            scene2Controller.setConference(this.c,this.conferece,this.p);
+            this.update_review_button.getScene().setRoot(parent);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
+    public void back(ActionEvent actionEvent) {
+        String nextScreen = "/sample/ReviewPaper.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(nextScreen));
+        try {
+            Parent parent = loader.load();
+            ReviewPaper scene2Controller = loader.getController();
+            scene2Controller.send_message(this.c);
+            this.back.getScene().setRoot(parent);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 }

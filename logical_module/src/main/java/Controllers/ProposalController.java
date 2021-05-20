@@ -17,6 +17,7 @@ public class ProposalController {
     public Proposal findOne(int id) { return repo.findOne(id); }
     public void update(Proposal proposal) { repo.update(proposal); }
     public void updateeval(int id) { repo.updaterequest(id); }
+    public void canceleval(int id) { repo.cancelrequest(id); }
     public Proposal findOneByAuthorIdConferenceId(int authorId, int conferenceId) { return repo.findOneByAuthorIdConferenceId(authorId, conferenceId); }
     public int getNextId(){return repo.getNextId();}
 }

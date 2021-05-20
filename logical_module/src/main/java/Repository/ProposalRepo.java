@@ -130,6 +130,17 @@ public class ProposalRepo {
         }
     }
 
+    public void cancelrequest(int id) {
+        String query = "update proposal set closer_eval=false where id=?";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
     public Proposal findOneByAuthorIdConferenceId(Integer authorId, Integer conferenceId) {
         Proposal proposal = null;
         String query = "select * from proposal where authorid=? and conferenceid=?";

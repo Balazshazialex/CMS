@@ -92,6 +92,19 @@ public class BidRepo {
             throwable.printStackTrace();
         }
     }
+    public void update_eval(Integer id,String eval){
+        String query = "update bid set evaluation=? where id=?";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+            ps.setInt(2, id);
+            ps.setString(1, eval);
+            ps.executeUpdate();
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
 
     public int getNextId() {
         String query = "select max(id)+1 from bid";
