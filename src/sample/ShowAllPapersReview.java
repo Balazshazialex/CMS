@@ -145,6 +145,10 @@ public class ShowAllPapersReview implements Initializable {
     public void submitreview(ActionEvent actionEvent) {
         Bid bid=new Bid(this.bidController.getNextId(),this.p.getId(),this.c.getId(),this.review.getText());
         bidController.add(bid);
+        this.submit_review_button.setVisible(false);
+        this.update_review_button.setVisible(false);
+        this.show_reviews_button.setVisible(true);
+
     }
 
     public void updatereview(ActionEvent actionEvent) {
