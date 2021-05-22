@@ -21,17 +21,17 @@ public class AllReviewsProposal implements Initializable {
     public ChoiceBox choicebox;
     @FXML
     public ListView reviewsList;
-    private ConferenceParticipant c;
+    private ConferenceParticipant participant;
     private Conference conferece;
     private ArrayList<Proposal> proposals;
     private ProposalController proposalController;
-    private ReviewController bidRepo;
+    private ReviewController reviewController;
     private Proposal proposal=null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.proposalController = new ProposalController();
-        this.bidRepo=new ReviewController();
+        this.reviewController =new ReviewController();
     }
 
     public void loadReviews(ActionEvent actionEvent) {
@@ -48,7 +48,7 @@ public class AllReviewsProposal implements Initializable {
         if (proposal!=null){
             this.reviewsList.getItems().clear();
             var pid=proposal.getId();
-            var bids=bidRepo.findAll();
+            var bids= reviewController.findAll();
             for(int i=0;i<bids.size();i++){
                 if(bids.get(i).getPid()==pid)
                 {
@@ -72,7 +72,7 @@ public class AllReviewsProposal implements Initializable {
     }
 
     public void setConference(Conference conference, ConferenceParticipant c) {
-        this.c = c;
+        this.participant = c;
         this.conferece = conference;
         fill_out_table();
     }
