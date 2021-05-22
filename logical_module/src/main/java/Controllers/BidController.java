@@ -1,6 +1,7 @@
 package Controllers;
 
 import Model.Bid;
+import Model.Proposal;
 import Repository.BidRepo;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public class BidController {
 
     public List<Bid> findAll() {
         return this.repo.findAll();
+    }
+    public List<Proposal> findAllByConference(Integer conferenceId) {
+        return this.repo.findAllByConference(conferenceId);
     }
 
     public Bid findOne(Integer PCMemberId, Integer proposalId) {

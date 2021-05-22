@@ -1,5 +1,6 @@
 package sample;
 
+import Controllers.BidController;
 import Controllers.ReviewController;
 import Controllers.ProposalController;
 import Model.Review;
@@ -50,8 +51,9 @@ public class ShowAllPapersReview implements Initializable {
     public Button back;
 
     private ConferenceParticipant c;
-    private Conference conferece;
+    private Conference conference;
     private ProposalController proposalController;
+    private BidController bidController;
     private ArrayList<Proposal> proposals;
     private ReviewController reviewController;
     private Proposal p=null;
@@ -59,10 +61,11 @@ public class ShowAllPapersReview implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.proposalController = new ProposalController();
         this.reviewController =new ReviewController();
+        this.bidController = new BidController();
     }
 
-    public void setConference(Conference conferen, ConferenceParticipant c) {
-        this.conferece = conferen;
+    public void setConference(Conference conference, ConferenceParticipant c) {
+        this.conference = conference;
         this.c = c;
         fill_out_table();
         hide_add_review();
@@ -88,18 +91,11 @@ public class ShowAllPapersReview implements Initializable {
     }
 
     private void fill_out_table() {
-        this.proposals = (ArrayList<Proposal>) proposalController.findAll();
-        for (var i = 0; i < proposals.size(); i++) {
-            if (proposals.get(i).getConferenceId() != this.conferece.getId()) {
-                proposals.remove(i);
-                i--;
-
-            } else {
-                this.choicebox.getItems().add(proposals.get(i).getName());
-            }
+        this.proposals = (ArrayList<Proposal>) proposalController.findAllByConference(this.conference.getId());
+        List<Proposal> toReview = this.bidController.findAllByConference(this.conference.getId());
+        for (var i = 0; i < toReview.size(); i++) {
+            this.choicebox.getItems().add(toReview.get(i).getName());
         }
-
-
     }
 
     public void loadProposal(ActionEvent actionEvent) {
@@ -162,7 +158,7 @@ public class ShowAllPapersReview implements Initializable {
             //sample.ConferenceController scene2Controller = loader.getController();
             sample.AllReviews scene2Controller = loader.getController();
             //scene2Controller.send_message(conference);
-            scene2Controller.setConference(this.c,this.conferece,this.p);
+            scene2Controller.setConference(this.c,this.conference,this.p);
             this.update_review_button.getScene().setRoot(parent);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
