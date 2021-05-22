@@ -2,11 +2,8 @@ package sample;
 
 import Controllers.ConferenceController;
 import Controllers.PCMembersController;
-import Controllers.ProposalController;
 import Controllers.UserController;
-import Model.Conference;
 import Model.ConferenceParticipant;
-import Model.PCMember;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

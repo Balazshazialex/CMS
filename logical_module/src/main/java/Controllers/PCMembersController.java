@@ -1,10 +1,7 @@
 package Controllers;
 
 import Model.Conference;
-import Model.Conference;
 import Model.ConferenceParticipant;
-import Model.PCMember;
-import Repository.ConferenceRepo;
 import Repository.PCMembersRepo;
 
 import java.util.List;

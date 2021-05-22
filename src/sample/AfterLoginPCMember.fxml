@@ -15,7 +15,7 @@
          <children>
             <Button fx:id="uploadInfoButton" mnemonicParsing="false" onAction="#uploadInfo" prefHeight="26.0" prefWidth="176.0" text="Upload personal information" />
             <Button fx:id="evaluatePaperButton" mnemonicParsing="false" onAction="#ReviewPaper" prefHeight="26.0" prefWidth="174.0" text="Evaluate paper" />
-            <Button fx:id="bidProposalsButton" mnemonicParsing="false"  prefHeight="26.0" prefWidth="174.0" text="Bid proposals" />
+            <Button fx:id="bidProposalsButton" mnemonicParsing="false" onAction="#goToBidProposals" prefHeight="26.0" prefWidth="174.0" text="Bid proposals" />
             <Button fx:id="chatButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="175.0" text="Chat" />
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="174.0" text="Log out" />
             <Label prefHeight="66.0" prefWidth="175.0" text="Chair/ Co-chair only operations" />

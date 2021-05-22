@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="474.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BidProposals">
+   <children>
+      <TableView fx:id="proposalsTable" layoutX="16.0" layoutY="59.0" prefHeight="388.0" prefWidth="702.0" />
+      <Label layoutX="17.0" layoutY="23.0" prefHeight="28.0" prefWidth="132.0" text="All proposals" />
+      <Button fx:id="reviewButton" layoutX="789.0" layoutY="124.0" mnemonicParsing="false" onAction="#addToReview" text="To review" />
+      <Button fx:id="rejectReviewButton" layoutX="780.0" layoutY="240.0" mnemonicParsing="false" onAction="#addRejectReview" text="Reject review" />
+      <Button fx:id="couldReviewButton" layoutX="780.0" layoutY="182.0" mnemonicParsing="false" onAction="#addToCouldReview" text="Could review" />
+      <Button layoutX="797.0" layoutY="415.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+   </children>
+</AnchorPane>

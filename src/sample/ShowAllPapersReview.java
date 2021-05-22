@@ -1,16 +1,11 @@
 package sample;
 
-import Controllers.BidController;
+import Controllers.ReviewController;
 import Controllers.ProposalController;
-import Model.Bid;
+import Model.Review;
 import Model.Conference;
 import Model.ConferenceParticipant;
 import Model.Proposal;
-import Repository.ProposalRepo;
-import javafx.beans.InvalidationListener;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,11 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.List;
 
 public class ShowAllPapersReview implements Initializable {
 
@@ -60,12 +53,12 @@ public class ShowAllPapersReview implements Initializable {
     private Conference conferece;
     private ProposalController proposalController;
     private ArrayList<Proposal> proposals;
-    private BidController bidController;
+    private ReviewController reviewController;
     private Proposal p=null;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.proposalController = new ProposalController();
-        this.bidController=new BidController();
+        this.reviewController =new ReviewController();
     }
 
     public void setConference(Conference conferen, ConferenceParticipant c) {
@@ -77,10 +70,10 @@ public class ShowAllPapersReview implements Initializable {
 
     private void hide_add_review() {
         if(this.p!=null) {
-            Bid bid=bidController.findOne_cidpid(this.p.getId(), this.c.getId());
-            if (bid != null) {
+            Review review = reviewController.findOne_cidpid(this.p.getId(), this.c.getId());
+            if (review != null) {
                 this.submit_review_button.setVisible(false);
-                this.review.setText(String.valueOf(bid.getEvaluation()));
+                this.review.setText(String.valueOf(review.getEvaluation()));
                 if(this.p.isRequest_eval()){
                     this.update_review_button.setVisible(true);
                 }
@@ -143,8 +136,8 @@ public class ShowAllPapersReview implements Initializable {
     }
 
     public void submitreview(ActionEvent actionEvent) {
-        Bid bid=new Bid(this.bidController.getNextId(),this.p.getId(),this.c.getId(),this.review.getText());
-        bidController.add(bid);
+        Review review =new Review(this.reviewController.getNextId(),this.p.getId(),this.c.getId(),this.review.getText());
+        reviewController.add(review);
         this.submit_review_button.setVisible(false);
         this.update_review_button.setVisible(false);
         this.show_reviews_button.setVisible(true);
@@ -152,8 +145,8 @@ public class ShowAllPapersReview implements Initializable {
     }
 
     public void updatereview(ActionEvent actionEvent) {
-        Bid bid=bidController.findOne_cidpid(this.p.getId(), this.c.getId());
-        this.bidController.update(bid.getId(),this.review.getText());
+        Review review = reviewController.findOne_cidpid(this.p.getId(), this.c.getId());
+        this.reviewController.update(review.getId(),this.review.getText());
         this.proposalController.canceleval(this.p.getId());
         this.update_review_button.setVisible(false);
         this.p.setRequest_eval(false);

@@ -34,7 +34,6 @@ public class ReviewPaper implements Initializable {
     public void send_message(ConferenceParticipant conferenceParticipant) {
         this.c = conferenceParticipant;
         populateConferencesList();
-
     }
 
     private void addcols() {
@@ -76,7 +75,6 @@ public class ReviewPaper implements Initializable {
     }
 
     private void populateConferencesList() {
-
         this.conf_table.getItems().clear();
         for (Conference conference : pc_controller.get_all_conferences_assigned_to_PCM(c.getId())) {
             this.conf_table.getItems().add(conference);

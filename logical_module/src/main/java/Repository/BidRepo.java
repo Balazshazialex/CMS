@@ -1,9 +1,6 @@
 package Repository;
 
 import Model.Bid;
-import Model.Conference;
-
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,102 +19,70 @@ public class BidRepo {
 
     public List<Bid> findAll() {
         String bobTheBuilder = "select * from bid";
-        ArrayList<Bid> conferences = new ArrayList<>();
+        ArrayList<Bid> bids = new ArrayList<>();
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(bobTheBuilder);
              var rs = ps.executeQuery()) {
             while (rs.next()) {
-                int id = rs.getInt("id");
-                int pid = rs.getInt("pid");
-                int cid = rs.getInt("cid");
-                String evaluation = rs.getString("evaluation");
+                int pcMemberId = rs.getInt("pcmemberid");
+                int proposalId = rs.getInt("proposalid");
+                int bidInfo = rs.getInt("bidinfo");
 
-                Bid jeanJacques = new Bid(id, pid, cid, evaluation);
-                conferences.add(jeanJacques);
+               Bid bid = new Bid(pcMemberId, proposalId, bidInfo);
+                bids.add(bid);
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-        return conferences;
+        return bids;
     }
 
-    public Bid findOne(Integer id) {
-        Bid conference = null;
-        String query = "select * from bid where id=?";
+    public Bid findOne(Integer PCMemberId, Integer proposalId) {
+        Bid bid = null;
+        String query = "select * from bid where pcmemberid=? and proposalid=?";
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(query)) {
-            ps.setInt(1, id);
+            ps.setInt(1, PCMemberId);
+            ps.setInt(2, proposalId);
             var rs = ps.executeQuery();
             rs.next();
-            int pid = rs.getInt("pid");
-            int cid = rs.getInt("cid");
-            var evaluation = rs.getString("evaluation");
-            conference = new Bid(id, pid, cid, evaluation);
+            int bidInfo = rs.getInt("bidinfo");
+            bid = new Bid(PCMemberId, proposalId, bidInfo);
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-        return conference;
+        return bid;
     }
 
-    public Bid findOne_cid_pid(Integer pid, Integer cid) {
-        Bid conference = null;
-        String query = "select * from bid where pid=? and cid=?";
+    public void add(Bid bid) {
+        if(! this.exists(bid)) {
+            String query = "insert into bid(pcmemberid, proposalid, bidinfo) values(?,?,?)";
+            try (var connection = DriverManager.getConnection(url, username, password);
+                 var ps = connection.prepareStatement(query)) {
+                ps.setInt(1, bid.getPCMemberId());
+                ps.setInt(2, bid.getProposalId());
+                ps.setInt(3, bid.getBidInfo());
+                ps.executeUpdate();
+
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
+            }
+        }
+    }
+
+    public boolean exists(Bid bid) {
+        String query = "select * from bid where pcmemberid=? and proposalid=?";
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(query)) {
-            ps.setInt(1, pid);
-            ps.setInt(2, cid);
+            ps.setInt(1, bid.getPCMemberId());
+            ps.setInt(2, bid.getProposalId());
             var rs = ps.executeQuery();
-            rs.next();
-            int id = rs.getInt("id");
-            var evaluation = rs.getString("evaluation");
-            conference = new Bid(id, pid, cid, evaluation);
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-        return conference;
-    }
-
-    public void add(Bid conference) {
-        String query = "insert into bid(pid,evaluation,cid,id) values(?,?,?,?)";
-        try (var connection = DriverManager.getConnection(url, username, password);
-             var ps = connection.prepareStatement(query)) {
-            ps.setInt(1, conference.getPid());
-            ps.setString(2, conference.getEvaluation());
-            ps.setInt(3, conference.getCid());
-            ps.setInt(4, conference.getId());
-            ps.executeUpdate();
+            if(rs.next()) return true;
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-    }
-    public void update_eval(Integer id,String eval){
-        String query = "update bid set evaluation=? where id=?";
-        try (var connection = DriverManager.getConnection(url, username, password);
-             var ps = connection.prepareStatement(query)) {
-            ps.setInt(2, id);
-            ps.setString(1, eval);
-            ps.executeUpdate();
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
-
-    public int getNextId() {
-        String query = "select max(id)+1 from bid";
-        try (var connection = DriverManager.getConnection(url, username, password);
-             var ps = connection.prepareStatement(query);
-             var result = ps.executeQuery()) {
-            result.next();
-            return result.getInt(1);
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-
-        return 1;
+        return false;
     }
 }

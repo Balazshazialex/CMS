@@ -76,6 +76,22 @@ public class AfterLoginPCMember implements Initializable {
             Parent parent = loader.load();
             ReviewPaper scene2Controller = loader.getController();
             scene2Controller.send_message(c);
+            this.evaluatePaperButton.getScene().setRoot(parent);
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
+    public void goToBidProposals() {
+        String nextScreen = "/sample/ChooseConference_PCMember.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(nextScreen));
+        try {
+            Parent parent = loader.load();
+            ChooseConference_PCMember scene2Controller = loader.getController();
+            scene2Controller.send_message(this.c);
             this.bidProposalsButton.getScene().setRoot(parent);
 
         } catch (IOException e) {
