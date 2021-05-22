@@ -184,4 +184,34 @@ public class ProposalRepo {
 
         return 1;
     }
+
+    public List<Proposal> findAllByConference(Integer conferenceId) {
+        List<Proposal> proposals = new ArrayList<>();
+        String query = "select * from proposal where conferenceid=?";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+            ps.setInt(1, conferenceId);
+            var rs = ps.executeQuery();
+
+            if(rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String listOfAuthors = rs.getString("listauthors");
+                String metaInfo = rs.getString("metainfo");
+                String abstractPaper = rs.getString("abstract");
+                String fullPaper = rs.getString("fullpaper");
+                String keywords = rs.getString("keywords");
+                String topics = rs.getString("topics");
+                boolean bool=rs.getBoolean("closer_eval");
+                int authorId = rs.getInt("authorid");
+                Proposal proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
+                        abstractPaper, fullPaper, keywords, topics,bool);
+                proposals.add(proposal);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+        return proposals;
+    }
 }

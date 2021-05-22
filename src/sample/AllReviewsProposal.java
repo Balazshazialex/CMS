@@ -1,19 +1,17 @@
 package sample;
 
-import Controllers.BidController;
+import Controllers.ReviewController;
 import Controllers.ProposalController;
-import Model.Bid;
+import Model.Review;
 import Model.Conference;
 import Model.ConferenceParticipant;
 import Model.Proposal;
-import Repository.BidRepo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 
-import javax.net.ssl.CertPathTrustManagerParameters;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,17 +21,17 @@ public class AllReviewsProposal implements Initializable {
     public ChoiceBox choicebox;
     @FXML
     public ListView reviewsList;
-    private ConferenceParticipant c;
+    private ConferenceParticipant participant;
     private Conference conferece;
     private ArrayList<Proposal> proposals;
     private ProposalController proposalController;
-    private BidController bidRepo;
+    private ReviewController reviewController;
     private Proposal proposal=null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.proposalController = new ProposalController();
-        this.bidRepo=new BidController();
+        this.reviewController =new ReviewController();
     }
 
     public void loadReviews(ActionEvent actionEvent) {
@@ -50,12 +48,12 @@ public class AllReviewsProposal implements Initializable {
         if (proposal!=null){
             this.reviewsList.getItems().clear();
             var pid=proposal.getId();
-            var bids=bidRepo.findAll();
+            var bids= reviewController.findAll();
             for(int i=0;i<bids.size();i++){
                 if(bids.get(i).getPid()==pid)
                 {
-                    Bid bid=bids.get(i);
-                    String stringy="Review #"+bid.getId()+ " by pc member with id "+bid.getCid()+ " result: "+bid.getEvaluation();
+                    Review review =bids.get(i);
+                    String stringy="Review #"+ review.getId()+ " by pc member with id "+ review.getCid()+ " result: "+ review.getEvaluation();
                     if(proposal.isRequest_eval()){
                         stringy=stringy+", request eval is true";
                     }
@@ -74,7 +72,7 @@ public class AllReviewsProposal implements Initializable {
     }
 
     public void setConference(Conference conference, ConferenceParticipant c) {
-        this.c = c;
+        this.participant = c;
         this.conferece = conference;
         fill_out_table();
     }

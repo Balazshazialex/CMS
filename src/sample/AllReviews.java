@@ -1,7 +1,7 @@
 package sample;
 
-import Controllers.BidController;
-import Model.Bid;
+import Controllers.ReviewController;
+import Model.Review;
 import Model.Conference;
 import Model.ConferenceParticipant;
 import Model.Proposal;
@@ -30,11 +30,11 @@ public class AllReviews implements Initializable {
     private Conference conferene;
     private ConferenceParticipant c;
     private Proposal p;
-    private BidController bidController;
+    private ReviewController reviewController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.bidController = new BidController();
+        this.reviewController = new ReviewController();
     }
 
     public void setConference(ConferenceParticipant c, Conference conferece, Proposal p) {
@@ -48,8 +48,8 @@ public class AllReviews implements Initializable {
     private void load() {
         this.reviewsList.getItems().clear();
         var pid = this.p.getId();
-        var bids = bidController.findAll();
-        for (Bid value : bids) {
+        var bids = reviewController.findAll();
+        for (Review value : bids) {
             if (value.getPid() == pid) {
                 String stringy = "Review #" + value.getId() + " by pc member with id " + value.getCid() + " result: " + value.getEvaluation();
                 if (this.p.isRequest_eval()) {

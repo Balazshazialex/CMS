@@ -1,47 +1,46 @@
 package Model;
 
 public class Bid {
-    private int id;
-    private int pid;
-    private int cid;
-    private String evaluation;
-    //pid - proposal id, cid- conf participant id
-    public Bid(int id, int pid, int cid, String evaluation) {
-        this.id = id;
-        this.pid = pid;
-        this.cid = cid;
-        this.evaluation = evaluation;
+    private int PCMemberId;
+    private int proposalId;
+    private int bidInfo; // -1 -> rejected, 0 -> could review, 1->pleased to review
+
+    public Bid(int PCMemberId, int proposalId, int bidInfo) {
+        this.PCMemberId = PCMemberId;
+        this.proposalId = proposalId;
+        this.bidInfo = bidInfo;
     }
 
-    public int getId() {
-        return id;
+    public int getPCMemberId() {
+        return PCMemberId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPCMemberId(int PCMemberId) {
+        this.PCMemberId = PCMemberId;
     }
 
-    public int getPid() {
-        return pid;
+    public int getProposalId() {
+        return proposalId;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public void setProposalId(int proposalId) {
+        this.proposalId = proposalId;
     }
 
-    public int getCid() {
-        return cid;
+    public int getBidInfo() {
+        return bidInfo;
     }
 
-    public void setCid(int cid) {
-        this.cid = cid;
+    public void setBidInfo(int bidInfo) {
+        this.bidInfo = bidInfo;
     }
 
-    public String getEvaluation() {
-        return evaluation;
-    }
-
-    public void setEvaluation(String evaluation) {
-        this.evaluation = evaluation;
+    @Override
+    public String toString() {
+        return "Bid{" +
+                "PCMemberId=" + PCMemberId +
+                ", proposalId=" + proposalId +
+                ", bidInfo=" + bidInfo +
+                '}';
     }
 }
