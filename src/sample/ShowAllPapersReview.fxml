@@ -41,7 +41,22 @@
             <TextArea fx:id="abstractPaper" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextArea fx:id="fullPaper" prefHeight="150.0" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextArea fx:id="metaInfo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="review" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         <HBox prefHeight="32.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <children>
+               <TextField fx:id="review" prefHeight="26.0" prefWidth="149.0" />
+               <MenuButton mnemonicParsing="false" text="choice">
+                 <items>
+                   <MenuItem mnemonicParsing="false" onAction="#setReviewResult" text="strong accept" />
+                   <MenuItem mnemonicParsing="false" onAction="#setReviewResult" text="accept" />
+                     <MenuItem mnemonicParsing="false" onAction="#setReviewResult" text="weak accept" />
+                     <MenuItem mnemonicParsing="false" onAction="#setReviewResult" text="borderline paper" />
+                     <MenuItem mnemonicParsing="false" onAction="#setReviewResult" text="weak reject" />
+                     <MenuItem mnemonicParsing="false" onAction="#setReviewResult" text="reject" />
+                     <MenuItem mnemonicParsing="false" onAction="#setReviewResult" text="strong reject" />
+                 </items>
+               </MenuButton>
+            </children>
+         </HBox>
         </children>
     </GridPane>
    <TextArea fx:id="recommendations" layoutX="540.0" layoutY="65.0" prefHeight="534.0" prefWidth="512.0" AnchorPane.bottomAnchor="14.600000000000023" AnchorPane.topAnchor="65.0" />

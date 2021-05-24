@@ -22,7 +22,7 @@
                 <VBox alignment="TOP_CENTER" prefHeight="132.0" prefWidth="316.0">
                     <children>
                         <Button cancelButton="true" mnemonicParsing="false" onAction="#ReviewPaper" prefHeight="26.0" prefWidth="173.0" text="Request closer evaluations" />
-                        <Button cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="175.0" text="Re-evaluate" />
+                        <Button cancelButton="true" mnemonicParsing="false" onAction="#goToAssignPapers" prefHeight="26.0" prefWidth="175.0" text="Re-evaluate" />
                         <Button cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="Divide into sections" />
                         <Button cancelButton="true" mnemonicParsing="false" onAction="#goToAssignPapers" prefHeight="26.0" prefWidth="173.0" text="Assign papers" />
                         <Button cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="172.0" text="Postpone deadlines" />

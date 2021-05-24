@@ -58,8 +58,10 @@ public class ProposalRepo {
                 String keywords = rs.getString("keywords");
                 String topics = rs.getString("topics");
                 boolean bool=rs.getBoolean("closer_eval");
+                int evaluation_result = rs.getInt("evaluation_result");
                 Proposal proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
                         abstractPaper, fullPaper, keywords, topics,bool);
+                proposal.setEvaluation_result(evaluation_result);
                 proposals.add(proposal);
 
             }
@@ -88,8 +90,10 @@ public class ProposalRepo {
             String keywords = rs.getString("keywords");
             String topics = rs.getString("topics");
             boolean bool=rs.getBoolean("closer_eval");
+            int evaluation_result = rs.getInt("evaluation_result");
             proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
                     abstractPaper, fullPaper, keywords, topics,bool);
+            proposal.setEvaluation_result(evaluation_result);
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -99,7 +103,7 @@ public class ProposalRepo {
 
     public void update(Proposal proposal) {
         String query = "update proposal " +
-                "set name=?, listauthors=?, metainfo=?, abstract=?, fullpaper=?, keywords=?, topics=? " +
+                "set name=?, listauthors=?, metainfo=?, abstract=?, fullpaper=?, keywords=?, topics=?, evaluation_result=? " +
                 "where id=?";
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(query)) {
@@ -112,6 +116,7 @@ public class ProposalRepo {
             ps.setString(6, proposal.getKeywords());
             ps.setString(7, proposal.getTopics());
             ps.setInt(8, proposal.getId());
+            ps.setInt(9, proposal.getEvaluation_result());
 
             ps.executeUpdate();
 
@@ -160,8 +165,10 @@ public class ProposalRepo {
                 String keywords = rs.getString("keywords");
                 String topics = rs.getString("topics");
                 boolean bool=rs.getBoolean("closer_eval");
+                int evaluation_result = rs.getInt("evaluation_result");
                 proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
                         abstractPaper, fullPaper, keywords, topics,bool);
+                proposal.setEvaluation_result(evaluation_result);
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -204,8 +211,10 @@ public class ProposalRepo {
                 String topics = rs.getString("topics");
                 boolean bool=rs.getBoolean("closer_eval");
                 int authorId = rs.getInt("authorid");
+                int evaluation_result = rs.getInt("evaluation_result");
                 Proposal proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
                         abstractPaper, fullPaper, keywords, topics,bool);
+                proposal.setEvaluation_result(evaluation_result);
                 proposals.add(proposal);
             }
         } catch (SQLException throwable) {

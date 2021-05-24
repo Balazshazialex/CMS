@@ -9,5 +9,6 @@
       <Button fx:id="biddingButton" layoutX="845.0" layoutY="58.0" mnemonicParsing="false" onAction="#goToBidProposals" text="Go to bidding" />
       <Button layoutX="845.0" layoutY="385.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
       <Button fx:id="assignPapersButton" layoutX="845.0" layoutY="95.0" mnemonicParsing="false" onAction="#goToAssignPapers" text="Assign papers" />
+      <Button layoutX="847.0" layoutY="139.0" mnemonicParsing="false" onAction="#goToReevaluate" prefHeight="26.0" prefWidth="90.0" text="Reevaluate" />
    </children>
 </AnchorPane>

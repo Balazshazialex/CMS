@@ -13,6 +13,7 @@ public class Proposal {
     private String keywords;
     private String topics;
     private boolean request_eval = false;
+    private int evaluation_result = 0;
 
     public Proposal(int id, int conferenceId, int authorId, String name,
                     String listOfAuthors, String metaInfo, String abstractPaper,
@@ -143,6 +144,14 @@ public class Proposal {
 
     public void setTopics(String topics) {
         this.topics = topics;
+    }
+
+    public int getEvaluation_result() {
+        return evaluation_result;
+    }
+
+    public void setEvaluation_result(int evaluation_result) {
+        this.evaluation_result = evaluation_result;
     }
 
     @Override

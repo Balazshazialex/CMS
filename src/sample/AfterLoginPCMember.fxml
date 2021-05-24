@@ -15,14 +15,14 @@
          <children>
             <Button fx:id="uploadInfoButton" mnemonicParsing="false" onAction="#uploadInfo" prefHeight="26.0" prefWidth="176.0" text="Upload personal information" />
             <Button fx:id="evaluatePaperButton" mnemonicParsing="false" onAction="#ReviewPaper" prefHeight="26.0" prefWidth="174.0" text="Evaluate paper" />
-            <Button fx:id="bidProposalsButton" mnemonicParsing="false" onAction="#goToBidProposals" prefHeight="26.0" prefWidth="174.0" text="Bid proposals" />
+            <Button fx:id="bidProposalsButton" mnemonicParsing="false" onAction="#goToChooseConference" prefHeight="26.0" prefWidth="174.0" text="Bid proposals" />
             <Button fx:id="chatButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="175.0" text="Chat" />
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="174.0" text="Log out" />
             <Label prefHeight="66.0" prefWidth="175.0" text="Chair/ Co-chair only operations" />
             <VBox alignment="TOP_CENTER" prefHeight="132.0" prefWidth="316.0">
                <children>
                   <Button cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" text="Request closer evaluations" />
-                  <Button cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="175.0" text="Re-evauate" />
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#goToChooseConference" prefHeight="26.0" prefWidth="175.0" text="Re-evaluate" />
                   <Button cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="Divide into sections" />
                   <Button cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" text="Assign papers" />
                   <Button cancelButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="172.0" text="Postpone deadlines" />

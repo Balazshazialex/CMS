@@ -2,6 +2,7 @@ package Controllers;
 
 import Model.ConferenceParticipant;
 import Model.Proposal;
+import Model.ProposalReviewDTO;
 import Model.Review;
 import Repository.ReviewRepo;
 
@@ -24,4 +25,5 @@ public class ReviewController {
     public int getNextId(){return repo.getNextId();}
     public List<Proposal> findProposalAssignedToReview(int participantId) { return this.repo.findProposalAssignedToReview(participantId); }
     public List<ConferenceParticipant> findParticipantsAssignedToReview(int proposalId) { return this.repo.findParticipantsAssignedToReview(proposalId); }
+    public List<ProposalReviewDTO> findReviewedProposals(int conferenceId) { return this.repo.findReviewedProposals(conferenceId); }
 }

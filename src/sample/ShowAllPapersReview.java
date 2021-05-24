@@ -133,11 +133,17 @@ public class ShowAllPapersReview implements Initializable {
         }
     }
 
+    public void setReviewResult(ActionEvent event) {
+        this.review.setText(((MenuItem)event.getSource()).getText());
+    }
+
     public void submitreview() {
         if(this.review.getText().length() == 0 || this.recommendations.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Review and recommendations must be filled in !", ButtonType.OK);
             alert.showAndWait();
+
         } else {
+
             Review review =new Review(this.reviewController.getNextId(),this.p.getId(),this.c.getId(),
                     this.review.getText(), this.recommendations.getText());
             reviewController.addReview(review);

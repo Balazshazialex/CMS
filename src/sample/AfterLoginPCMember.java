@@ -86,7 +86,7 @@ public class AfterLoginPCMember implements Initializable {
         }
     }
 
-    public void goToBidProposals() {
+    public void goToChooseConference() {
         String nextScreen = "/sample/ChooseConference.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(nextScreen));
@@ -101,4 +101,5 @@ public class AfterLoginPCMember implements Initializable {
             alert.showAndWait();
         }
     }
+
 }

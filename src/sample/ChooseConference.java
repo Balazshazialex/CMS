@@ -130,6 +130,28 @@ public class ChooseConference implements Initializable {
         }
     }
 
+
+    public void goToReevaluate() {
+        if(this.participant.getRole().equals("Chair/ co-chair")) {
+            var selectedIndex = this.conferencesTable.getSelectionModel().getSelectedIndex();
+            Conference conference = (Conference) this.conferencesTable.getItems().get(selectedIndex);
+
+            String nextScreen = "/sample/Reevaluation.fxml";
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(nextScreen));
+            try {
+                Parent parent = loader.load();
+                Reevaluation scene2Controller = loader.getController();
+                scene2Controller.send_message(this.participant, conference);
+                this.conferencesTable.getScene().setRoot(parent);
+
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
+        }
+    }
+
     public void goBack() {
         if(this.participant.getRole().equals("PC Member")) {
             String nextScreen = "/sample/AfterLoginPCMember.fxml";
