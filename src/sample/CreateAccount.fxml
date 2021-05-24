@@ -6,10 +6,17 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CreateAccount">
    <children>
+      <Label layoutX="177.0" layoutY="44.0" prefHeight="66.0" prefWidth="246.0" text="Create your user account">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="150.0" layoutY="121.0" text="Name" />
+      <TextField fx:id="name" layoutX="211.0" layoutY="117.0" prefHeight="26.0" prefWidth="186.0" />
       <Label layoutX="150.0" layoutY="148.0" prefHeight="32.0" prefWidth="57.0" text="Username" />
+      <TextField fx:id="username" layoutX="211.0" layoutY="151.0" prefHeight="26.0" prefWidth="186.0" />
       <Label layoutX="150.0" layoutY="184.0" prefHeight="32.0" prefWidth="57.0" text="Password" />
       <PasswordField fx:id="password" layoutX="211.0" layoutY="187.0" prefHeight="26.0" prefWidth="185.0" />
-      <TextField fx:id="username" layoutX="211.0" layoutY="151.0" prefHeight="26.0" prefWidth="186.0" />
       <Label layoutX="150.0" layoutY="224.0" prefHeight="32.0" prefWidth="57.0" text="Role" />
       <MenuButton layoutX="208.0" layoutY="227.0" mnemonicParsing="false" text="Role">
         <items>
@@ -22,13 +29,6 @@
       </MenuButton>
       <Label fx:id="selectedRole" layoutX="280.0" layoutY="231.0" prefHeight="19.0" prefWidth="106.0" />
       <Button layoutX="246.0" layoutY="301.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="26.0" prefWidth="96.0" text="Create" />
-      <Label layoutX="177.0" layoutY="44.0" prefHeight="66.0" prefWidth="246.0" text="Create your user account">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label layoutX="150.0" layoutY="121.0" text="Name" />
-      <TextField fx:id="name" layoutX="211.0" layoutY="117.0" prefHeight="26.0" prefWidth="186.0" />
       <Button layoutX="246.0" layoutY="336.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="26.0" prefWidth="96.0" text="Go to login" />
    </children>
 </AnchorPane>

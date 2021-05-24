@@ -8,10 +8,15 @@ import Model.ConferenceParticipant;
 import Model.Proposal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -88,7 +93,21 @@ public class AllReviewsProposal implements Initializable {
                 this.choicebox.getItems().add(proposals.get(i).getName());
             }
         }
+    }
 
+    public void back() {
+        String nextScreen = "/sample/ReviewPaper.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(nextScreen));
+        try {
+            Parent parent = loader.load();
+            ReviewPaper scene2Controller = loader.getController();
+            scene2Controller.send_message(this.participant);
+            this.choicebox.getScene().setRoot(parent);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
 }

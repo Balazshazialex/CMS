@@ -49,7 +49,7 @@ public class Controller implements Initializable {
         String password = this.passwordField.getText();
         String role = this.loginRoleLabel.getText();
         if(this.userController.checkCreds(username, password,role)) {
-            String nextScreen = "/sample/LoginForm.fxml";
+            String nextScreen = "";
             if(role.equals("Steering committee member")) {
                 nextScreen = "/sample/AfterLoginSteeringCommitteeMember.fxml";
             } else if(role.equals("PC member")) {
