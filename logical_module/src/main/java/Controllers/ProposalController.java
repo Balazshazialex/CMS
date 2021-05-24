@@ -14,6 +14,7 @@ public class ProposalController {
 
     public void add(Proposal proposal) { repo.add(proposal); }
     public List<Proposal> findAll() { return repo.findAll(); }
+    public List<Proposal> findAllByConference(Integer conferenceId) { return repo.findAllByConference(conferenceId); }
     public Proposal findOne(int id) { return repo.findOne(id); }
     public void update(Proposal proposal) { repo.update(proposal); }
     public void updateeval(int id) { repo.updaterequest(id); }
