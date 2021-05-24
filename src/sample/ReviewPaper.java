@@ -108,9 +108,7 @@ public class ReviewPaper implements Initializable {
             loader.setLocation(getClass().getResource(nextScreen));
             try {
                 Parent parent = loader.load();
-                //sample.ConferenceController scene2Controller = loader.getController();
                 sample.AllReviewsProposal scene2Controller = loader.getController();
-                //scene2Controller.send_message(conference);
                 scene2Controller.setConference(conference, this.c);
                 this.conf_table.getScene().setRoot(parent);
             } catch (IOException e) {
@@ -150,6 +148,5 @@ public class ReviewPaper implements Initializable {
                 alert.showAndWait();
             }
         }
-
     }
 }
