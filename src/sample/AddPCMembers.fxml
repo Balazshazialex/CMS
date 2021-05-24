@@ -7,9 +7,10 @@
     <children>
         <Label layoutX="23.0" layoutY="37.0" prefHeight="18.0" prefWidth="90.0" text="Conference:" />
         <ListView fx:id="participantsList" layoutX="23.0" layoutY="58.0" onMouseClicked="#moveToSelectedList" prefHeight="325.0" prefWidth="311.0" />
-        <Button layoutX="454.0" layoutY="346.0" mnemonicParsing="false" onAction="#addPCMembers" prefHeight="26.0" prefWidth="136.0" text="Add as PC member" />
+        <Button layoutX="433.0" layoutY="333.0" mnemonicParsing="false" onAction="#addPCMembers" prefHeight="26.0" prefWidth="136.0" text="Add as PC member" />
         <Label fx:id="conferenceInfoLabel" layoutX="96.0" layoutY="37.0" prefHeight="18.0" prefWidth="83.0" />
         <ListView fx:id="addedPCMembers" layoutX="370.0" layoutY="58.0" onMouseClicked="#removePCMember" prefHeight="265.0" prefWidth="199.0" />
         <Label layoutX="370.0" layoutY="29.0" text="Added PC Members" />
+      <Button id="backButton" fx:id="backButton" layoutX="517.0" layoutY="359.0" mnemonicParsing="false" onAction="#back" text="Back" />
     </children>
 </AnchorPane>

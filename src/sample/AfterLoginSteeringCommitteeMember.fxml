@@ -45,7 +45,8 @@
                 <TextField fx:id="id" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             </children>
         </GridPane>
-        <Button fx:id="addConferenceButton" layoutX="1188.0" layoutY="400.0" mnemonicParsing="false" onAction="#addConference" text="Add conference" />
-        <Button fx:id="updateConferenceButton" layoutX="1188.0" layoutY="449.0" mnemonicParsing="false" onAction="#updateConference" text="Update conference" />
+        <Button fx:id="addConferenceButton" layoutX="1188.0" layoutY="376.0" mnemonicParsing="false" onAction="#addConference" text="Add conference" />
+        <Button fx:id="updateConferenceButton" layoutX="1188.0" layoutY="415.0" mnemonicParsing="false" onAction="#updateConference" text="Update conference" />
+      <Button fx:id="backButton" layoutX="1188.0" layoutY="451.0" mnemonicParsing="false" onAction="#back" text="Back" />
     </children>
 </AnchorPane>

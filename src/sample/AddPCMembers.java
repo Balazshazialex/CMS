@@ -6,11 +6,13 @@ import Controllers.UserController;
 import Model.Conference;
 import Model.ConferenceParticipant;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,8 @@ public class AddPCMembers implements Initializable {
     private ListView<String> addedPCMembers;
     @FXML
     private Label conferenceInfoLabel;
+    @FXML
+    private Button backButton;
 
     public void addPCMembers() {
         this.pcMembersController.addPCMembers(this.selectedConference, this.selectedParticipants);
@@ -83,6 +87,19 @@ public class AddPCMembers implements Initializable {
 
         this.addedPCMembers.getItems().remove(selectedIndex);
         this.selectedParticipants.remove(PCmember);
+    }
+
+    public void back() {
+        String nextScreen = "/sample/AfterLoginSteeringCommitteeMember.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(nextScreen));
+        try {
+            Parent parent = loader.load();
+            this.backButton.getScene().setRoot(parent);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
     }
 
 }
