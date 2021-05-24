@@ -1,6 +1,7 @@
 package Repository;
 
 import Model.Bid;
+import Model.ConferenceParticipant;
 import Model.Proposal;
 
 import java.sql.DriverManager;
@@ -89,7 +90,7 @@ public class BidRepo {
     }
 
     public List<Proposal> findAllByConference(Integer conferenceId) {
-        String query = "select proposal.* from bid, proposal where proposalid=id and conferenceid=? and bidinfo<>-1";
+        String query = "select distinct proposal.* from bid, proposal where proposalid=id and conferenceid=? and bidinfo<>-1";
         ArrayList<Proposal> proposals = new ArrayList<>();
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(query)) {
@@ -116,6 +117,35 @@ public class BidRepo {
             throwable.printStackTrace();
         }
         return proposals;
+    }
+
+    public List<ConferenceParticipant> findAllParticipantsByProposal(Integer proposalId) {
+        String query = "select distinct conferenceparticipant.* from bid, conferenceparticipant " +
+                "where id=pcmemberid and proposalid=? and bidinfo<>-1";
+        ArrayList<ConferenceParticipant> participants = new ArrayList<>();
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+
+            ps.setInt(1, proposalId);
+            var rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                boolean hasPayedFee = rs.getBoolean("haspayedfee");
+                String cardNumber=rs.getString("cardnumber");
+                String affiliation=rs.getString("affiliation");
+                String webPage=rs.getString("webpage");
+                String role = rs.getString("role");
+                ConferenceParticipant participant =new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage,role);
+                participants.add(participant);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return participants;
     }
 
 }

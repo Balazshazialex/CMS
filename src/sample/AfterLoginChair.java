@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class AfterLoginChair extends AfterLoginPCMember implements Initializable {
     private ConferenceParticipant c;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -38,4 +39,19 @@ public class AfterLoginChair extends AfterLoginPCMember implements Initializable
         }
     }
 
+    public void goToAssignPapers() {
+        String nextScreen = "/sample/ChooseConference.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(nextScreen));
+        try {
+            Parent parent = loader.load();
+            ChooseConference scene2Controller = loader.getController();
+            scene2Controller.send_message(c);
+            this.bidProposalsButton.getScene().setRoot(parent);
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
 }

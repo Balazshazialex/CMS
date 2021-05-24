@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="547.0" prefWidth="1364.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AssignPapers">
+   <children>
+      <TableView fx:id="proposalsTable" layoutX="14.0" layoutY="53.0" onMouseClicked="#showPCMembers" prefHeight="485.0" prefWidth="812.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="53.0" />
+      <TableView fx:id="participantsTable" layoutX="845.0" layoutY="53.0" prefHeight="314.0" prefWidth="499.0" AnchorPane.bottomAnchor="180.0" AnchorPane.topAnchor="53.0" />
+      <Label layoutX="14.0" layoutY="22.0" prefHeight="35.0" prefWidth="129.0" text="All proposals" />
+      <Label layoutX="844.0" layoutY="22.0" prefHeight="35.0" prefWidth="129.0" text="PC members" />
+      <Button layoutX="858.0" layoutY="435.0" mnemonicParsing="false" onAction="#addToReview" text="Add as reviewer" />
+      <Button layoutX="975.0" layoutY="435.0" mnemonicParsing="false" onAction="#back" text="Back" />
+   </children>
+</AnchorPane>

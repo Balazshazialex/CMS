@@ -87,12 +87,12 @@ public class AfterLoginPCMember implements Initializable {
     }
 
     public void goToBidProposals() {
-        String nextScreen = "/sample/ChooseConference_PCMember.fxml";
+        String nextScreen = "/sample/ChooseConference.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(nextScreen));
         try {
             Parent parent = loader.load();
-            ChooseConference_PCMember scene2Controller = loader.getController();
+            ChooseConference scene2Controller = loader.getController();
             scene2Controller.send_message(this.c);
             this.bidProposalsButton.getScene().setRoot(parent);
 

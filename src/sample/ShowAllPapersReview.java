@@ -49,6 +49,8 @@ public class ShowAllPapersReview implements Initializable {
     public Button show_reviews_button;
     @FXML
     public Button back;
+    @FXML
+    public TextArea recommendations;
 
     private ConferenceParticipant c;
     private Conference conference;
@@ -131,16 +133,23 @@ public class ShowAllPapersReview implements Initializable {
         }
     }
 
-    public void submitreview(ActionEvent actionEvent) {
-        Review review =new Review(this.reviewController.getNextId(),this.p.getId(),this.c.getId(),this.review.getText());
-        reviewController.add(review);
-        this.submit_review_button.setVisible(false);
-        this.update_review_button.setVisible(false);
-        this.show_reviews_button.setVisible(true);
-
+    public void submitreview() {
+        if(this.review.getText().length() == 0 || this.recommendations.getText().length() == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Review and recommendations must be filled in !", ButtonType.OK);
+            alert.showAndWait();
+        } else {
+            Review review =new Review(this.reviewController.getNextId(),this.p.getId(),this.c.getId(),
+                    this.review.getText(), this.recommendations.getText());
+            reviewController.addReview(review);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Review added !", ButtonType.OK);
+            alert.showAndWait();
+            this.submit_review_button.setVisible(false);
+            this.update_review_button.setVisible(false);
+            this.show_reviews_button.setVisible(true);
+        }
     }
 
-    public void updatereview(ActionEvent actionEvent) {
+    public void updatereview() {
         Review review = reviewController.findOne_cidpid(this.p.getId(), this.c.getId());
         this.reviewController.update(review.getId(),this.review.getText());
         this.proposalController.canceleval(this.p.getId());
@@ -149,15 +158,13 @@ public class ShowAllPapersReview implements Initializable {
         hide_add_review();
     }
 
-    public void showreviews(ActionEvent actionEvent) {
+    public void showreviews() {
         String nextScreen = "/sample/AllReviews.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(nextScreen));
         try {
             Parent parent = loader.load();
-            //sample.ConferenceController scene2Controller = loader.getController();
             sample.AllReviews scene2Controller = loader.getController();
-            //scene2Controller.send_message(conference);
             scene2Controller.setConference(this.c,this.conference,this.p);
             this.update_review_button.getScene().setRoot(parent);
         } catch (IOException e) {
@@ -166,7 +173,7 @@ public class ShowAllPapersReview implements Initializable {
         }
     }
 
-    public void back(ActionEvent actionEvent) {
+    public void back() {
         String nextScreen = "/sample/ReviewPaper.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(nextScreen));

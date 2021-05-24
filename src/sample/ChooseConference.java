@@ -7,24 +7,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChooseConference_PCMember implements Initializable {
+public class ChooseConference implements Initializable {
 
     private PCMembersController pcMembersController;
-    private ConferenceParticipant PCMember;
+    private ConferenceParticipant participant;
 
     @FXML
     private TableView conferencesTable;
-
+    @FXML
+    private Button biddingButton;
+    @FXML
+    private Button assignPapersButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,16 +71,24 @@ public class ChooseConference_PCMember implements Initializable {
 
     private void populateConferencesList() {
         this.conferencesTable.getItems().clear();
-        for (Conference conference : this.pcMembersController.get_all_conferences_assigned_to_PCM(this.PCMember.getId())) {
+        for (Conference conference : this.pcMembersController.get_all_conferences_assigned_to_PCM(this.participant.getId())) {
             this.conferencesTable.getItems().add(conference);
         }
     }
 
     public void send_message(ConferenceParticipant conferenceParticipant) {
-        this.PCMember = conferenceParticipant;
+        this.participant = conferenceParticipant;
         this.pcMembersController = new PCMembersController();
         this.addcols();
         this.populateConferencesList();
+
+        if(this.participant.getRole().equals("PC Member")) {
+            this.biddingButton.setVisible(true);
+            this.assignPapersButton.setVisible(false);
+        } else {
+            this.biddingButton.setVisible(false);
+            this.assignPapersButton.setVisible(true);
+        }
     }
 
     public void goToBidProposals() {
@@ -93,7 +101,27 @@ public class ChooseConference_PCMember implements Initializable {
         try {
             Parent parent = loader.load();
             BidProposals scene2Controller = loader.getController();
-            scene2Controller.send_message(this.PCMember, conference);
+            scene2Controller.send_message(this.participant, conference);
+            this.conferencesTable.getScene().setRoot(parent);
+
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
+
+    public void goToAssignPapers() {
+        var selectedIndex = this.conferencesTable.getSelectionModel().getSelectedIndex();
+        Conference conference = (Conference) this.conferencesTable.getItems().get(selectedIndex);
+
+        String nextScreen = "/sample/AssignPapers.fxml";
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(nextScreen));
+        try {
+            Parent parent = loader.load();
+            AssignPapers scene2Controller = loader.getController();
+            scene2Controller.send_message(this.participant, conference);
             this.conferencesTable.getScene().setRoot(parent);
 
         } catch (IOException e) {
@@ -103,19 +131,35 @@ public class ChooseConference_PCMember implements Initializable {
     }
 
     public void goBack() {
-        String nextScreen = "/sample/AfterLoginPCMember.fxml";
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(nextScreen));
-        try {
-            Parent parent = loader.load();
-            AfterLoginPCMember scene2Controller = loader.getController();
-            scene2Controller.send_message(this.PCMember);
-            this.conferencesTable.getScene().setRoot(parent);
+        if(this.participant.getRole().equals("PC Member")) {
+            String nextScreen = "/sample/AfterLoginPCMember.fxml";
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(nextScreen));
+            try {
+                Parent parent = loader.load();
+                AfterLoginPCMember scene2Controller = loader.getController();
+                scene2Controller.send_message(this.participant);
+                this.conferencesTable.getScene().setRoot(parent);
 
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
-            alert.showAndWait();
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
+        } else {
+            String nextScreen = "/sample/AfterLoginChair.fxml";
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(nextScreen));
+            try {
+                Parent parent = loader.load();
+                AfterLoginChair scene2Controller = loader.getController();
+                scene2Controller.send_message(this.participant);
+                this.conferencesTable.getScene().setRoot(parent);
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+                alert.showAndWait();
+            }
         }
+
     }
 
 }

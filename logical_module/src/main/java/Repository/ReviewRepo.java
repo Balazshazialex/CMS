@@ -1,5 +1,7 @@
 package Repository;
 
+import Model.ConferenceParticipant;
+import Model.Proposal;
 import Model.Review;
 
 import java.sql.DriverManager;
@@ -29,8 +31,9 @@ public class ReviewRepo {
                 int pid = rs.getInt("pid");
                 int cid = rs.getInt("cid");
                 String evaluation = rs.getString("evaluation");
+                String recommendations = rs.getString("recommendations");
 
-                Review jeanJacques = new Review(id, pid, cid, evaluation);
+                Review jeanJacques = new Review(id, pid, cid, evaluation, recommendations);
                 conferences.add(jeanJacques);
             }
         } catch (SQLException throwable) {
@@ -50,7 +53,8 @@ public class ReviewRepo {
             int pid = rs.getInt("pid");
             int cid = rs.getInt("cid");
             var evaluation = rs.getString("evaluation");
-            conference = new Review(id, pid, cid, evaluation);
+            String recommendations = rs.getString("recommendations");
+            conference = new Review(id, pid, cid, evaluation, recommendations);
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -59,31 +63,35 @@ public class ReviewRepo {
     }
 
     public Review findOne_cid_pid(Integer pid, Integer cid) {
-        Review conference = null;
+        Review review = null;
         String query = "select * from review where pid=? and cid=?";
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(query)) {
             ps.setInt(1, pid);
             ps.setInt(2, cid);
             var rs = ps.executeQuery();
-            rs.next();
-            int id = rs.getInt("id");
-            var evaluation = rs.getString("evaluation");
-            conference = new Review(id, pid, cid, evaluation);
+            if(rs.next()) {
+                int id = rs.getInt("id");
+                var evaluation = rs.getString("evaluation");
+                String recommendations = rs.getString("recommendations");
+                review = new Review(id, pid, cid, evaluation, recommendations);
+            }
+
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-        return conference;
+        return review;
     }
 
-    public void add(Review conference) {
-        String query = "insert into review(pid,evaluation,cid,id) values(?,?,?,?)";
+    public void add(Review review) {
+        String query = "insert into review(pid,evaluation,cid,id,recommendations) values(?,?,?,?,?)";
         try (var connection = DriverManager.getConnection(url, username, password);
              var ps = connection.prepareStatement(query)) {
-            ps.setInt(1, conference.getPid());
-            ps.setString(2, conference.getEvaluation());
-            ps.setInt(3, conference.getCid());
-            ps.setInt(4, conference.getId());
+            ps.setInt(1, review.getPid());
+            ps.setString(2, review.getEvaluation());
+            ps.setInt(3, review.getCid());
+            ps.setInt(4, review.getId());
+            ps.setString(5, review.getRecommendations());
             ps.executeUpdate();
 
         } catch (SQLException throwable) {
@@ -117,5 +125,79 @@ public class ReviewRepo {
         }
 
         return 1;
+    }
+
+    public List<ConferenceParticipant> findParticipantsAssignedToReview(int proposalId) {
+        String bobTheBuilder="select conferenceparticipant.* from assignedforreview, conferenceparticipant " +
+                "where proposalid=? and id=assignedforreview.participantid";
+        ArrayList<ConferenceParticipant> peopleThatFeelSuperior=new ArrayList<>();
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(bobTheBuilder)) {
+
+            ps.setInt(1, proposalId);
+            var rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                boolean hasPayedFee = rs.getBoolean("haspayedfee");
+                String cardNumber=rs.getString("cardnumber");
+                String affiliation=rs.getString("affiliation");
+                String webPage=rs.getString("webpage");
+                String role = rs.getString("role");
+                ConferenceParticipant jeanJacques=new ConferenceParticipant(id,name,username,password,hasPayedFee,cardNumber,affiliation,webPage,role);
+                peopleThatFeelSuperior.add(jeanJacques);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return peopleThatFeelSuperior;
+    }
+
+    public List<Proposal> findProposalAssignedToReview(int participantId) {
+        String bobTheBuilder="select proposal.* from assignedforreview, proposal " +
+                "where participantid=? and proposalid=proposal.id";
+        ArrayList<Proposal> proposals=new ArrayList<>();
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(bobTheBuilder)) {
+
+            ps.setInt(1, participantId);
+            var rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int conferenceId = rs.getInt("conferenceid");
+                int authorId = rs.getInt("authorid");
+                String name = rs.getString("name");
+                String listOfAuthors = rs.getString("listauthors");
+                String metaInfo = rs.getString("metainfo");
+                String abstractPaper = rs.getString("abstract");
+                String fullPaper = rs.getString("fullpaper");
+                String keywords = rs.getString("keywords");
+                String topics = rs.getString("topics");
+                boolean bool=rs.getBoolean("closer_eval");
+                Proposal proposal = new Proposal(id, conferenceId, authorId, name, listOfAuthors, metaInfo,
+                        abstractPaper, fullPaper, keywords, topics,bool);
+                proposals.add(proposal);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return proposals;
+    }
+
+    public void addAssignedReview( int participantId, int proposalId) {
+        String query = "insert into assignedforreview(participantid, proposalid) values (?,?)";
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(query)) {
+            ps.setInt(1, participantId);
+            ps.setInt(2, proposalId);
+            ps.executeUpdate();
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
     }
 }

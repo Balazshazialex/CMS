@@ -1,61 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.ShowAllPapersReview"
-            prefHeight="600.0" prefWidth="600.0">
-    <ChoiceBox fx:id="choicebox" layoutX="10" layoutY="10"></ChoiceBox>
-    <Button fx:id="load_proposal_button" onAction="#loadProposal" layoutX="150" layoutY="10">Load Proposal</Button>
-    <Button fx:id="submit_review_button" onAction="#submitreview" layoutX="250" layoutY="10">Submit Review</Button>
-    <Button fx:id="update_review_button" onAction="#updatereview" layoutX="250" layoutY="10" visible="false">Update Review</Button>
-    <Button fx:id="show_reviews_button" onAction="#showreviews" layoutX="400" layoutY="10" visible="false">Show all reviews</Button>
-    <Button fx:id="back" onAction="#back" layoutX="600" layoutY="100" >Back</Button>
-    <GridPane layoutX="32.0" layoutY="8.0" prefHeight="488.0" prefWidth="469.0" AnchorPane.bottomAnchor="15.0"
-              AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="50.0">
+<AnchorPane prefHeight="614.0" prefWidth="1109.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ShowAllPapersReview">
+    <ChoiceBox fx:id="choicebox" layoutX="10" layoutY="10" />
+    <Button fx:id="load_proposal_button" layoutX="150" layoutY="10" onAction="#loadProposal">Load Proposal</Button>
+    <Button fx:id="submit_review_button" layoutX="250" layoutY="10" onAction="#submitreview">Submit Review</Button>
+    <Button fx:id="update_review_button" layoutX="250" layoutY="10" onAction="#updatereview" visible="false">Update Review</Button>
+    <Button fx:id="show_reviews_button" layoutX="400" layoutY="10" onAction="#showreviews" visible="false">Show all reviews</Button>
+    <Button fx:id="back" layoutX="983.0" layoutY="10.0" onAction="#back">Back</Button>
+    <GridPane layoutX="32.0" layoutY="8.0" prefHeight="488.0" prefWidth="469.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="50.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="66.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="310.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="66.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="310.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="61.400000000000006" minHeight="3.6000000000000014" prefHeight="25.6"
-                            vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="91.4" minHeight="10.0" prefHeight="39.99999999999999" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="199.2000076293945" minHeight="10.0" prefHeight="38.00000000000003"
-                            vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="208.39999999999998" minHeight="10.0" prefHeight="29.80000000000001"
-                            vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="222.39999999999998" minHeight="10.0" prefHeight="28.400000000000006"
-                            vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="235.39999999999998" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="176.39999999999998" minHeight="10.0" prefHeight="167.39999999999998"
-                            vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="61.400000000000006" minHeight="3.6000000000000014" prefHeight="25.6" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="91.4" minHeight="10.0" prefHeight="39.99999999999999" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="199.2000076293945" minHeight="10.0" prefHeight="38.00000000000003" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="208.39999999999998" minHeight="10.0" prefHeight="29.80000000000001" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="222.39999999999998" minHeight="10.0" prefHeight="28.400000000000006" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="235.39999999999998" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="176.39999999999998" minHeight="10.0" prefHeight="167.39999999999998" vgrow="SOMETIMES" />
+         <RowConstraints />
         </rowConstraints>
         <children>
-            <Label text="Authors" GridPane.rowIndex="1"/>
-            <Label text="Meta info" GridPane.rowIndex="2"/>
-            <Label text="Full paper" GridPane.rowIndex="6"/>
-            <Label text="Keywords" GridPane.rowIndex="3"/>
-            <Label text="Topics" GridPane.rowIndex="4"/>
-            <Label text="Abstract" GridPane.rowIndex="5"/>
-            <Label text="Name"/>
-            <Label text="Your review" GridPane.rowIndex="7"/>
-            <TextField fx:id="name" GridPane.columnIndex="1"/>
-            <TextField fx:id="listOfAuthors" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-            <TextField fx:id="keywords" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-            <TextField fx:id="topics" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-            <TextArea fx:id="abstractPaper" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
-                      GridPane.rowIndex="5"/>
-            <TextArea fx:id="fullPaper" prefHeight="150.0" prefWidth="292.0" GridPane.columnIndex="1"
-                      GridPane.rowIndex="6"/>
-            <TextArea fx:id="metaInfo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
-                      GridPane.rowIndex="2"/>
-            <TextField fx:id="review" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+            <Label text="Authors" GridPane.rowIndex="1" />
+            <Label text="Meta info" GridPane.rowIndex="2" />
+            <Label text="Full paper" GridPane.rowIndex="6" />
+            <Label text="Keywords" GridPane.rowIndex="3" />
+            <Label text="Topics" GridPane.rowIndex="4" />
+            <Label text="Abstract" GridPane.rowIndex="5" />
+            <Label text="Name" />
+            <Label text="Your review" GridPane.rowIndex="7" />
+            <TextField fx:id="name" GridPane.columnIndex="1" />
+            <TextField fx:id="listOfAuthors" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="keywords" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="topics" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextArea fx:id="abstractPaper" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextArea fx:id="fullPaper" prefHeight="150.0" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextArea fx:id="metaInfo" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="review" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         </children>
     </GridPane>
+   <TextArea fx:id="recommendations" layoutX="540.0" layoutY="65.0" prefHeight="534.0" prefWidth="512.0" AnchorPane.bottomAnchor="14.600000000000023" AnchorPane.topAnchor="65.0" />
+   <Label layoutX="540.0" layoutY="34.0" prefHeight="26.0" prefWidth="126.0" text="Your recommendations" />
 </AnchorPane>
