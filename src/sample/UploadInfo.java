@@ -43,9 +43,15 @@ public class UploadInfo implements Initializable {
     @FXML
     private Button backButton;
 
+    private ConferenceParticipant participant;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public void send_message(ConferenceParticipant participant) {
+        this.participant = participant;
     }
 
     public void goBack() {
@@ -54,6 +60,8 @@ public class UploadInfo implements Initializable {
         loader.setLocation(getClass().getResource(nextScreen));
         try {
             Parent parent = loader.load();
+            AfterLoginPCMember scene2Controller = loader.getController();
+            scene2Controller.send_message(this.participant);
             this.backButton.getScene().setRoot(parent);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);

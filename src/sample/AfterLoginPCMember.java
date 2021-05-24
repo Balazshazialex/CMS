@@ -42,6 +42,8 @@ public class AfterLoginPCMember implements Initializable {
         loader.setLocation(getClass().getResource(nextScreen));
         try {
             Parent parent = loader.load();
+            UploadInfo scene2Controller = loader.getController();
+            scene2Controller.send_message(this.c);
             this.uploadInfoButton.getScene().setRoot(parent);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
