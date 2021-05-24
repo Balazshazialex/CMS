@@ -149,15 +149,12 @@ public class AfterLoginAuthor implements Initializable {
     public void enterconference(ActionEvent actionEvent) {
         int  index = this.conf_table.getSelectionModel().getSelectedIndex();
         Conference conference= (Conference) this.conf_table.getItems().get(index);
-        //String nextScreen = "/sample/Conference.fxml";
         String nextScreen = "/sample/UploadProposal.fxml";
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(nextScreen));
         try {
             Parent parent = loader.load();
-            //sample.ConferenceController scene2Controller = loader.getController();
             sample.UploadProposal scene2Controller = loader.getController();
-            //scene2Controller.send_message(conference);
             scene2Controller.setConference(conference, this.c);
             this.conf_table.getScene().setRoot(parent);
         } catch (IOException e) {

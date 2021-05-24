@@ -26,10 +26,6 @@ public class AfterLoginSteeringCommitteeMember implements Initializable {
     public TableView conf_table;
     private ConferenceController conferenceController;
 
-    //    @FXML
-//    private ListView<String> conferencesList;
-    @FXML
-    private Button addConferenceButton;
     @FXML
     private TextField nameTextField;
     @FXML
@@ -61,9 +57,15 @@ public class AfterLoginSteeringCommitteeMember implements Initializable {
         Date proposalDeadline = new Date((Date.from(Instant.from(this.proposalDeadline.getValue().atStartOfDay(ZoneId.systemDefault())))).getTime());
         Date fullPaperDeadline = new Date((Date.from(Instant.from(this.fullPaperDeadline.getValue().atStartOfDay(ZoneId.systemDefault())))).getTime());
         int phase = Integer.parseInt(this.Phase.getText());
-        Conference conference = new Conference(id, name, startDate, endDate, callForPapers, proposalDeadline, fullPaperDeadline, phase);
-        this.conferenceController.add(conference);
-        this.populateConferencesList();
+
+        if (name.length() < 3) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Name must have at least 3 characters !", ButtonType.OK);
+            alert.showAndWait();
+        } else {
+            Conference conference = new Conference(id, name, startDate, endDate, callForPapers, proposalDeadline, fullPaperDeadline, phase);
+            this.conferenceController.add(conference);
+            this.populateConferencesList();
+        }
     }
     private void addcols(){
         TableColumn id = new TableColumn("ID");
@@ -119,9 +121,14 @@ public class AfterLoginSteeringCommitteeMember implements Initializable {
         Date proposalDeadline = new Date((Date.from(Instant.from(this.proposalDeadline.getValue().atStartOfDay(ZoneId.systemDefault())))).getTime());
         Date fullPaperDeadline = new Date((Date.from(Instant.from(this.fullPaperDeadline.getValue().atStartOfDay(ZoneId.systemDefault())))).getTime());
         int phase = Integer.parseInt(this.Phase.getText());
-        Conference conference = new Conference(id, name, startDate, endDate, callForPapers, proposalDeadline, fullPaperDeadline, phase);
-        this.conferenceController.update(conference);
-        this.populateConferencesList();
+        if (name.length() < 3) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Name must have at least 3 characters !", ButtonType.OK);
+            alert.showAndWait();
+        } else {
+            Conference conference = new Conference(id, name, startDate, endDate, callForPapers, proposalDeadline, fullPaperDeadline, phase);
+            this.conferenceController.update(conference);
+            this.populateConferencesList();
+        }
     }
 
     public void addPCMembersToConference() {

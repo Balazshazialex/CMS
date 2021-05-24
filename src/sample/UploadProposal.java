@@ -70,11 +70,10 @@ public class UploadProposal implements Initializable {
     public void addProposal() {
         Date dateNow = new Date();
 
-        if(dateNow.before(this.conference.getCallForPapers())) {
+        if (dateNow.before(this.conference.getCallForPapers())) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Call for papers not started yet", ButtonType.OK);
             alert.showAndWait();
-        }
-        else if(dateNow.after(this.conference.getProposalDeadline())) {
+        } else if (dateNow.after(this.conference.getProposalDeadline())) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Past deadline for uploading", ButtonType.OK);
             alert.showAndWait();
 
@@ -87,12 +86,20 @@ public class UploadProposal implements Initializable {
             String listOfAuthors = this.listOfAuthors.getText();
             String metaInfo = this.metaInfo.getText();
 
-            Proposal proposal = new Proposal(conference.getId(), this.author.getId(), name, listOfAuthors, metaInfo, abstractPaper,
-                    fullPaper, keywords, topics);
-            this.proposalController.add(proposal);
-            this.populateTextFields(proposal);
+            if (name.length() < 3) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Name must have at least 3 characters !", ButtonType.OK);
+                alert.showAndWait();
+            } else if (abstractPaper.length() < 20) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Abstract paper must have at least 20 characters !", ButtonType.OK);
+                alert.showAndWait();
+            } else {
+                Proposal proposal = new Proposal(conference.getId(), this.author.getId(), name, listOfAuthors, metaInfo, abstractPaper,
+                        fullPaper, keywords, topics);
+                this.proposalController.add(proposal);
+                this.populateTextFields(proposal);
+            }
         }
-  }
+    }
 
     public void updateProposal() {
         Date dateNow = new Date();
@@ -112,10 +119,18 @@ public class UploadProposal implements Initializable {
         String listOfAuthors = this.listOfAuthors.getText();
         String metaInfo = this.metaInfo.getText();
 
-        Proposal proposal = new Proposal(conference.getId(), this.author.getId(), name, listOfAuthors, metaInfo, abstractPaper,
-                fullPaper, keywords, topics);
-        this.proposalController.update(proposal);
-        this.populateTextFields(proposal);
+        if(name.length() < 3) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Name must have at least 3 characters !", ButtonType.OK);
+            alert.showAndWait();
+        } else if(abstractPaper.length() < 20) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Abstract paper must have at least 20 characters !", ButtonType.OK);
+            alert.showAndWait();
+        } else {
+            Proposal proposal = new Proposal(conference.getId(), this.author.getId(), name, listOfAuthors, metaInfo, abstractPaper,
+                    fullPaper, keywords, topics);
+            this.proposalController.update(proposal);
+            this.populateTextFields(proposal);
+        }
     }
 
     public void setConference(Conference conference, ConferenceParticipant author) {
