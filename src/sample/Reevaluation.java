@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -24,9 +21,13 @@ public class Reevaluation implements Initializable {
     private Conference conference;
     private ReviewController reviewController;
     private ProposalController proposalController;
+    private Proposal selectedProposal;
 
     @FXML
     private TableView proposalsToReevaluate;
+
+    @FXML
+    public ListView reviewsList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -124,6 +125,7 @@ public class Reevaluation implements Initializable {
         var selectedIndex = this.proposalsToReevaluate.getSelectionModel().getSelectedIndex();
         Proposal proposal = (Proposal) this.proposalsToReevaluate.getItems().get(selectedIndex);
         proposal.setEvaluation_result(1);
+        this.selectedProposal = proposal;
         this.proposalController.update(proposal);
     }
 
@@ -131,6 +133,7 @@ public class Reevaluation implements Initializable {
         var selectedIndex = this.proposalsToReevaluate.getSelectionModel().getSelectedIndex();
         Proposal proposal = (Proposal) this.proposalsToReevaluate.getItems().get(selectedIndex);
         proposal.setEvaluation_result(-1);
+        this.selectedProposal = proposal;
         this.proposalController.update(proposal);
     }
 
@@ -138,6 +141,7 @@ public class Reevaluation implements Initializable {
         var selectedIndex = this.proposalsToReevaluate.getSelectionModel().getSelectedIndex();
         Proposal proposal = (Proposal) this.proposalsToReevaluate.getItems().get(selectedIndex);
         proposal.setRequest_eval(true);
+        this.selectedProposal = proposal;
         this.proposalController.update(proposal);
     }
 
@@ -154,6 +158,19 @@ public class Reevaluation implements Initializable {
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
             alert.showAndWait();
+        }
+    }
+
+    public void showReviewsForProposal() {
+        var selectedIndex = this.proposalsToReevaluate.getSelectionModel().getSelectedIndex();
+        Proposal proposal = (Proposal) this.proposalsToReevaluate.getItems().get(selectedIndex);
+        this.selectedProposal = proposal;
+        this.reviewsList.getItems().clear();
+        var reviews = this.reviewController.findAllReviewsByProposalId(this.selectedProposal.getId());
+        for (Review review : reviews) {
+            String reviewInfo = "Review #" + review.getId() + " by pc member with id " + review.getCid()
+                    + " result: " + review.getEvaluation();
+            this.reviewsList.getItems().add(reviewInfo);
         }
     }
 }

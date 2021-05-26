@@ -26,4 +26,5 @@ public class ReviewController {
     public List<Proposal> findProposalAssignedToReview(int participantId) { return this.repo.findProposalAssignedToReview(participantId); }
     public List<ConferenceParticipant> findParticipantsAssignedToReview(int proposalId) { return this.repo.findParticipantsAssignedToReview(proposalId); }
     public List<ProposalReviewDTO> findReviewedProposals(int conferenceId) { return this.repo.findReviewedProposals(conferenceId); }
+    public List<Review> findAllReviewsByProposalId(int proposalId) { return this.repo.findAllReviewsByProposalId(proposalId);}
 }

@@ -241,4 +241,28 @@ public class ReviewRepo {
         }
         return proposalsReviews;
     }
+
+    public List<Review> findAllReviewsByProposalId(int proposalId) {
+        String bobTheBuilder = "select * from review where pid=?";
+        ArrayList<Review> reviews = new ArrayList<>();
+        try (var connection = DriverManager.getConnection(url, username, password);
+             var ps = connection.prepareStatement(bobTheBuilder)) {
+
+            ps.setInt(1, proposalId);
+            var rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int pid = rs.getInt("pid");
+                int cid = rs.getInt("cid");
+                String evaluation = rs.getString("evaluation");
+                String recommendations = rs.getString("recommendations");
+
+                Review jeanJacques = new Review(id, pid, cid, evaluation, recommendations);
+                reviews.add(jeanJacques);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return reviews;
+    }
 }
