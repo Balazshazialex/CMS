@@ -93,16 +93,17 @@ public class ShowAllPapersReview implements Initializable {
     }
 
     private void fill_out_table() {
-        this.proposals = (ArrayList<Proposal>) proposalController.findAllByConference(this.conference.getId());
-        List<Proposal> toReview = this.bidController.findAllByConference(this.conference.getId());
-        for (var i = 0; i < toReview.size(); i++) {
-            this.choicebox.getItems().add(toReview.get(i).getName());
+        var proposalsList = (ArrayList<Proposal>) proposalController.findAllByConference(this.conference.getId());
+        this.proposals = (ArrayList<Proposal>) this.bidController.findAllByConference(this.conference.getId());
+        for (var i = 0; i < this.proposals.size(); i++) {
+            this.choicebox.getItems().add(this.proposals.get(i).getName());
         }
     }
 
     public void loadProposal(ActionEvent actionEvent) {
         Proposal proposal = null;
         String value = (String) this.choicebox.getSelectionModel().getSelectedItem();
+
         for (var i = 0; i < proposals.size(); i++) {
             if (proposals.get(i).getName().equals(value)) {
                 proposal = proposals.get(i);
@@ -110,7 +111,6 @@ public class ShowAllPapersReview implements Initializable {
             }
         }
         if (proposal != null) {
-
             this.name.setText(proposal.getName());
             this.name.setEditable(false);
             this.listOfAuthors.setText(proposal.getListOfAuthors());
