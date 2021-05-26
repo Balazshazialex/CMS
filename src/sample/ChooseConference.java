@@ -82,7 +82,7 @@ public class ChooseConference implements Initializable {
         this.addcols();
         this.populateConferencesList();
 
-        if(this.participant.getRole().equals("PC Member")) {
+        if(this.participant.getRole().equals("PC member")) {
             this.biddingButton.setVisible(true);
             this.assignPapersButton.setVisible(false);
         } else {
